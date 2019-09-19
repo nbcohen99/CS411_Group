@@ -1,8 +1,9 @@
 # Split Check
 ## Slogan:		“A web app that makes going out to eat with your friends easier”
 ## Description:
- - This is a web app (with a mobile app interface) with 2 main features. One feature is that it allows users to easily, synchronously split and pay for checks at restaurants. Upon receiving your check at the restaurant, you can take a picture of it and the web app will automatically split the check, and send Venmo requests to people within your group (based on your preferences). You may do things like evenly split the check, or group items together for certain people to pay.
- - Another functionality is the ability to suggest places for certain friend groups to go. Upon creating your group of friends on the web app, you can request it to give you a suggestion on where to eat. It pulls data from Venmo (places you’ve eaten, things you’ve eaten, amount you’ve paid) and suggests places dependant on location, menu, and cost by inputting this information into Yelp.
+This is a web app (with a mobile app interface) with 2 main features. One feature is that it allows users to easily, synchronously split and pay for checks at restaurants. Upon receiving your check at the restaurant, you can take a picture of it and the web app will automatically split the check, and send Venmo requests to people within your group (based on your preferences). You may do things like evenly split the check, or group items together for certain people to pay.
+ 
+Another functionality is the ability to suggest places for certain friend groups to go. Upon creating your group of friends on the web app, you can request it to give you a suggestion on where to eat. It pulls data from Venmo (places you’ve eaten, things you’ve eaten, amount you’ve paid) and suggests places dependant on location, menu, and cost by inputting this information into Yelp.
 ## How to use the app:
  - Make a group of friends on the web app
  - Pull transaction information from Venmo (specifically food based on description) for each group member and figure out approximately how much each person spends →
