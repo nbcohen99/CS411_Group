@@ -12,7 +12,7 @@ Function:  Upload a photo of receipt at the end of the meal and the Google Visio
 # Trip Planner
 ## Slogan:		“A web app that makes (almost) all the decisions in trip-planning for you”
 ## Description: 
-	This is a web app that is designed to make planning trips with a group of friends easier, by handling hotel booking and compiling events for the trip. This app will consider budget to make sure that all group members can participate in scheduled events. This app places a strong emphasis on polling, which gives users more control over their preferences.
+This is a web app that is designed to make planning trips with a group of friends easier, by handling hotel booking and compiling events for the trip. This app will consider budget to make sure that all group members can participate in scheduled events. This app places a strong emphasis on polling, which gives users more control over their preferences.
 How to use the app:
 Make a group of friends on the web app (friends can be found by linking to Facebook)
 Input a location for the trip → a hotel booking API will send out a poll of options within a given price range
