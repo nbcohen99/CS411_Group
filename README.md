@@ -2,7 +2,7 @@
 Repo for our group in CS411
 
 ## Project Layout
-Our web app ([Split Check](https://splitcheck.github.io/)) uses the Mongo-Express-Angular-Node (MEAN) software stack
+Our web app ([Split Check](https://splitcheck.github.io/)) uses the Mongo-Express-Angular-Node (MEAN) software stack.  The database and app *production* servers are both located at [54.164.165.203](http://54.164.165.203/) on (AWS)[https://aws.amazon.com/].  *Development* version can be found here:
 
 ```shell
 ├─ docs/          Documentation
