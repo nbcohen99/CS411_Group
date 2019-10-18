@@ -13,24 +13,19 @@ export class SearchComponent implements OnInit {
     private yelpSearch: YelpSearchService,
     ) { }
 
-//   Yelp API Stuff:
-// Client ID
-// AIDbWpXQyrDAdNzE3cRxhg
-
-// API Key
-// CWUaTFyAkkwf9rR3ktjTru2TFcNzY4DDpza6eVvCSDHZ89YN1dRSckT0MT6vKU14WuA4nKqDAkc6E4tKFB7qUfqYOHo4W4BHSfv4n9c6u58GMn3TZbAGcVauc-upXXYx
 
   ngOnInit() {
   }
 
   searchYelp(query: string) {
+    // resets the data with each search
     this.data = '';
     this.yelpSearch.getData(query).subscribe(
       data => {
         for (var i = 0; i < 20; i++) {
+          // TODO: build interface for returned data
           var business = data.businesses[i]
-          console.log(business.alias);
-          this.data += '\n' + business.alias;
+          this.data += '\n' + business.alias + '------------' + business.location.display_address;
         }
       }
       
