@@ -1,0 +1,10 @@
+<p>search works!</p>
+
+<input #searchInput (keyup.enter)="searchYelp(searchInput.value)">
+<button (click)="searchYelp(searchInput.value)">Add</button>
+
+<div class="multi_lines_text">{{ data }}</div>
+
+<style>
+.multi_lines_text { white-space: pre-line; }
+</style>
