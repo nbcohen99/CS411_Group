@@ -45,7 +45,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<input #searchInput placeholder=\"Enter your search term\" (keyup.enter)=\"searchYelp(searchInput.value)\">\n<button (click)=\"searchYelp(searchInput.value)\">Search</button>\n\n<div class=\"multi_lines_text\">{{ data }}</div>\n\n<style>\n.multi_lines_text { white-space: pre-line; }\n</style>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<input #searchInput placeholder=\"Enter your search term\" (keyup.enter)=\"searchYelp(searchInput.value)\">\n<button (click)=\"searchYelp(searchInput.value)\">Search</button>\n\n<div class=\"multi_lines_text\">{{ data }}</div>\n");
 
 /***/ }),
 
@@ -374,7 +374,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3NlYXJjaC9zZWFyY2guY29tcG9uZW50LmNzcyJ9 */");
+/* harmony default export */ __webpack_exports__["default"] = (".multi_lines_text { \n    white-space: pre-line; \n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvc2VhcmNoL3NlYXJjaC5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0kscUJBQXFCO0FBQ3pCIiwiZmlsZSI6InNyYy9hcHAvc2VhcmNoL3NlYXJjaC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLm11bHRpX2xpbmVzX3RleHQgeyBcbiAgICB3aGl0ZS1zcGFjZTogcHJlLWxpbmU7IFxufSJdfQ== */");
 
 /***/ }),
 
@@ -464,7 +464,7 @@ let YelpSearchService = class YelpSearchService {
             'Content-Type': 'application/json',
             'Authorization': 'Bearer ' + token
         });
-        return this.http.get("http://54.164.165.203/yelp.php?businesses/search?", {
+        return this.http.get("https://54.164.165.203/yelp.php?businesses/search?", {
             headers: reqHeader,
             params: {
                 "location": "boston",
