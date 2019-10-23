@@ -23,11 +23,11 @@ export class YelpSearchService {
   getData(term: string) {
     const token = 'CWUaTFyAkkwf9rR3ktjTru2TFcNzY4DDpza6eVvCSDHZ89YN1dRSckT0MT6vKU14WuA4nKqDAkc6E4tKFB7qUfqYOHo4W4BHSfv4n9c6u58GMn3TZbAGcVauc-upXXYx';
 
-    let reqHeader = new HttpHeaders({ 
+    let reqHeader = new HttpHeaders({
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token
     });
-    return this.http.get("https://api.yelp.com/v3/businesses/search", {
+    return this.http.get("http://54.164.165.203/yelp.php?businesses/search?", {  //"https://api.yelp.com/v3/businesses/search", {
       headers: reqHeader,
       params: {
         "location": "boston",
