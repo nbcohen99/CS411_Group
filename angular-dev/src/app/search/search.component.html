@@ -1,0 +1,4 @@
+<input #searchInput placeholder="Enter your search term" (keyup.enter)="searchYelp(searchInput.value)">
+<button (click)="searchYelp(searchInput.value)">Search</button>
+
+<div class="multi_lines_text">{{ data }}</div>
