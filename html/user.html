@@ -27,9 +27,16 @@
             background-color: #45b39d;
             color: #ffffff;
         }
+        .bg-3 {
+            background-color: #a2d9ce;
+            color: #ffffff;
+        }
 
         .container {
             padding: 15px;
+        }
+        .container-no-botpad {
+            padding-top: 48px;
         }
         .container-fluid {
             padding-top: 48px;
@@ -61,8 +68,22 @@
             right: 0px;
         }
         .navbar-nav li a:hover {
-            color: #45b39d !important;
+            color: #a2d9ce !important;
         }
+
+        /* Navtab colors */
+        .nav li a {
+            color:#154360 !important;
+        }
+        .nav-tabs li.active a, .nav-tabs li.active a:focus, .nav-tabs li.active a:hover {
+            background-color: #a2d9ce !important;
+            border-bottom-color: transparent !important;
+            border-color: #154360;
+        }
+        .nav-tabs {
+            border-bottom-color: #154360 !important;
+        }
+        /* how to change group tab color (white ->) & hover border color */
 
     </style>
   </head>
@@ -106,10 +127,35 @@
     </div>
     <div class="container-fluid-header bg-1 text-left">
     </div>
-    <div class="container-fluid bg-2">
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure, repellat, pariatur illo, provident earum aspernatur eos dignissimos commodi harum rerum quis dolor ea! Vitae debitis non veniam nam pariatur! Accusamus?</p>
+    <!-- Nav tabs -->
+    <div class="container-no-botpad bg-2">
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#groups">GROUPS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#trans">TRANSACTIONS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#history">HISTORY</a>
+            </li>
+        </ul>
     </div>
-
+    <!-- Tab panes (content) -->
+    <div class="container-fluid bg-3">
+        <div class="tab-content">
+            <div id="groups" class="container tab-pane active"><br>
+                <h3>GROUPS</h3>
+            </div>
+            <div id="trans" class="container tab-pane fade"><br>
+                <h3>TRANSACTIONS</h3>
+            </div>
+            <div id="history" class="container tab-pane fade"><br>
+                <h3>HISTORY</h3>
+            </div>
+        </div>
+    </div>
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
