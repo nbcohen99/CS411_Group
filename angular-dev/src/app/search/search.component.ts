@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { YelpSearchService } from '../yelp-search.service';
+import { YelpSearchService } from '../services/yelp-search.service';
 
 @Component({
   selector: 'app-search',
@@ -23,8 +23,6 @@ export class SearchComponent implements OnInit {
     this.yelpSearch.getData(query).subscribe(
       (data : any) => {
         for (var i = 0; i < 20; i++) {
-          console.log(data);
-          console.log(data.businesses);
           // TODO: build interface for returned data
           var business = {alias: null, location: {display_address: null}};
           // if (!(data.businesses === "undefined")) {
