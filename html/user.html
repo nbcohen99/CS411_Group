@@ -14,7 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     
-    <title>USER</title>
+    <title>User</title>
     <style>
         html * {
             font-family: 'Source Sans Pro', sans-serif;
@@ -85,6 +85,15 @@
         }
         /* how to change group tab color (white ->) & hover border color */
 
+        .btn-add {
+            -webkit-transition-duration: 0.3s;
+            transition-duration: 0.4s;
+        }
+        .btn-add:hover {
+            background-color: #45b39d; /* Green */
+            color: white;
+        }
+
     </style>
   </head>
   <body>
@@ -146,7 +155,59 @@
         <div class="tab-content">
             <div id="groups" class="container tab-pane active"><br>
                 <h3>GROUPS</h3>
-            </div>
+                <div class="row">
+                    <div class="col-4">
+                      <div class="list-group" id="list-tab" role="tablist">
+                        <!--
+                        <a class="list-group-item list-group-item-action active" id="list-1-list" data-toggle="list" href="#list-1" role="tab" aria-controls="1">1</a>
+                        <a class="list-group-item list-group-item-action" id="list-2-list" data-toggle="list" href="#list-2" role="tab" aria-controls="2">2</a>
+                        <a class="list-group-item list-group-item-action" id="list-3-list" data-toggle="list" href="#list-3" role="tab" aria-controls="3">3</a>
+                        <a class="list-group-item list-group-item-action" id="list-4-list" data-toggle="list" href="#list-4" role="tab" aria-controls="4">4</a>-->
+                      </div>
+                    </div>
+                    <div class="col-8">
+                      <div class="tab-content" id="nav-tabContent">
+                          <!--
+                        <div class="tab-pane fade show active" id="list-1" role="tabpanel" aria-labelledby="list-1-list"></div>
+                        <div class="tab-pane fade" id="list-2" role="tabpanel" aria-labelledby="list-2-list">...</div>
+                        <div class="tab-pane fade" id="list-3" role="tabpanel" aria-labelledby="list-3-list">...</div>
+                        <div class="tab-pane fade" id="list-4" role="tabpanel" aria-labelledby="list-4-list">...</div>-->
+                      </div>
+                    </div>
+                    <form class="form-inline"> <!-- MAKE THIS SCROLLABLE -->
+                            <div class="form-group">
+                                <label id="groupform" for="group-name"></label>
+                                <textarea class="form-control" rows="1" id="group-name" placeholder="Group Name"></textarea>
+                            </div>
+                            <button type="button" class="btn btn-add">Add</button>
+                    </form>
+
+                    <!-- MOVE TO MAKE PER GROUP -->
+                    <form>
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <h4>$CALCULATED OR INPUT BUDGET.00</h4>
+                                <label class="sr-only" for="inlineFormInputGroup">Budget</label>
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend"></div>
+                                    <div class="input-group-text">$</div>
+                                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="0.00">
+                                    <button class="btn btn-outline-secondary" type="button">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <h4>PICK A RESTAURANT</h4>> <!-- Pull from Yelp into this list -->
+                          <select multiple class="form-control" id="form-select">
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                          </select>
+                        </div>
+                      </form>
+
             <div id="trans" class="container tab-pane fade"><br>
                 <h3>TRANSACTIONS</h3>
             </div>
@@ -155,6 +216,23 @@
             </div>
         </div>
     </div>
+
+    <script>
+        //Add button to add a group -- need to add info within each group + editing options
+        $(document).ready(function(){
+            $('.btn-add').click(function() { //STYLE THE BUTTON
+                comment = $('textarea').val();   
+                temp = "temp";
+                $form = $("<div/>")
+                        .attr("id","")
+                        .addClass("")
+                        .html("<div></div>");
+                $('.list-group').append("<a class='list-group-item list-group-item-action' id='list-"+comment+"-list' data-toggle='list' href='#list-"+comment+"' role='tab' aria-controls='1'>"+comment+"</a>");
+                $('.tab-content').append("<div class='tab-pane fade' id='list-"+comment+"' role='tabpanel' aria-labelledby='list-"+comment+"-list'>"+temp+"</div>");
+            });
+            
+        });
+    </script>
     
 
     <!-- Optional JavaScript -->
