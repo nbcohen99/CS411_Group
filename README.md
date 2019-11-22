@@ -10,3 +10,11 @@ Our web app [Split Check](https://splitcheck.github.io/) uses the Mongo-Express-
 │  └─ dist/         Local web directory to incrementally push to the production server
 ├─ mongo-dev/     Mongo development directory to eventually deploy on the database server
 ```
+
+## Build
+Install first node and angular.  Then:
+```shell
+cd angular-dev
+npm build
+ng build
+```
