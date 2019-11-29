@@ -1,0 +1,5 @@
+<button (click)="getUsers()">GetAllUsers</button>
+
+<input #searchInput placeholder="Enter id here" (keyup.enter)="getUserByTheID(searchInput.value)">
+<button (click)="getUserByTheID(searchInput.value)">SearchByID</button>
+<div class="multi_lines_text">{{ data }}</div>

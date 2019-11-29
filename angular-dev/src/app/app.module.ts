@@ -8,6 +8,7 @@ import { SearchComponent } from './search/search.component';
 import {HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { SocialLoginModule, AuthServiceConfig, AuthService, GoogleLoginProvider} from 'angularx-social-login';
+import { DatabaseComponent } from './database/database.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -29,6 +30,7 @@ export function getAuthServiceConfigs() {
     AppComponent,
     SearchComponent,
     LoginComponent,
+    DatabaseComponent,
   ],
   imports: [
     BrowserModule,
