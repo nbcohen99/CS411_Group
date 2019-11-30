@@ -77,7 +77,7 @@ export class LoginComponent implements OnInit {
         };
 
         // check that server trusts us
-        this.http.get("http://54.164.165.203/oauth.php", {
+        this.http.get("https://54.164.165.203/oauth.php", {
             params: {
                 "idToken": idToken
             }

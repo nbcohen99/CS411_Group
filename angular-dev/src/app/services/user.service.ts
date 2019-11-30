@@ -16,12 +16,12 @@ export class UserService {
         return "";
     }
     public getAllUsers(): Observable<User[]> {
-        return this.http.get<User[]>("http://54.164.165.203/showUsers.php").pipe(
+        return this.http.get<User[]>("https://54.164.165.203/showUsers.php").pipe(
             map(data => data.map(data => new User().deserialize(data))));
     }
 
     public getUserByID(id: string): Observable<User[]> {
-        return this.http.get<User[]>("http://54.164.165.203/getUserByID.php", {
+        return this.http.get<User[]>("https://54.164.165.203/getUserByID.php", {
             params: {
                 "id": id
             }
@@ -31,8 +31,8 @@ export class UserService {
 
     public makeNewUser(user: SocialUser) {
         console.log("Creating new user w/ this data..");
-        console.log(user)
-        this.http.get("http://54.164.165.203/createUser.php", {
+        console.log(user);
+        this.http.get("https://54.164.165.203/createUser.php", {
             params: {
                 "id": user.id,
                 "name": user.name,
