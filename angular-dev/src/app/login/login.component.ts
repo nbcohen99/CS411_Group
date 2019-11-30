@@ -43,8 +43,8 @@ export class LoginComponent implements OnInit {
                         this.userService.makeNewUser(userData);
                         return
                     }else {
-                        console.log("Returning User Detected");
-                        //do stuff for returning user
+                        console.log("Returning User Detected, token updated");
+                        this.userService.updateToken(userData.id, userData.idToken)
                     }
                 });
                 
