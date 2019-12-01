@@ -69,12 +69,16 @@ export class UserService {
 
         //TODO: Verify userID and friendID before sending to backend
 
+        function f(result: { ok: boolean, msg: string }) {
+            console.log("UpdateToken Function on UID " + userID + " w/ + " + token + " completed:");
+            console.log(result);
+        }
         this.http.get("https://54.164.165.203/updateToken.php", {
             params: {
                 "id": userID,
                 "token": token
             }
-        });
+        }).subscribe(f.bind(this), f.bind(this));
     }
 
     /*

@@ -18,17 +18,21 @@ export class DatabaseComponent implements OnInit {
     ngOnInit() {
     }
 
+    /*
+     * Some basic examples on how to use the UserService
+     */
+
     getUsers() {
         //This returns an Observable<User[]> Object that contains all users in database
         //See models/user.model.ts for attributes
         this.userService.getAllUsers().subscribe(users => {
             console.log("List of all users:")
-            console.log(users)
+            console.log(<User[]>users)
             console.log("Individual users:")
             var i: number;
             this.data = "";
             for (i = 0; i < users.length; i++){
-                console.log(users[i]);
+                console.log(<User>users[i]);
                 this.data += "\n\n" + (<User>users[i]);
             }
         });
