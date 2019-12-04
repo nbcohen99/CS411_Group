@@ -69,7 +69,7 @@ export class LoginComponent implements OnInit {
 
     login() {
         setTimeout(function () {
-            this.redirect.navigate(['/search']);
+            this.redirect.navigate(['/profile']);
         }.bind(this), 2000);
 
     }
@@ -111,7 +111,7 @@ export class LoginComponent implements OnInit {
         };
 
         // check that server trusts us
-        this.http.get("https://54.164.165.203/oauth.php", {
+        this.http.get("http://54.164.165.203/oauth.php", {
             params: {
                 "idToken": idToken
             }

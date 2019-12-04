@@ -10,6 +10,9 @@ import { LoginComponent } from './login/login.component';
 import { SocialLoginModule, AuthServiceConfig, AuthService, GoogleLoginProvider } from 'angularx-social-login';
 import { DatabaseComponent } from './database/database.component';
 import { CookieService } from 'ngx-cookie-service';
+import { GroupsComponent } from './groups/groups.component';
+import { FriendsComponent } from './friends/friends.component';
+import { ProfileComponent } from './profile/profile.component';
 
 // Configs 
 export function getAuthServiceConfigs() {
@@ -32,6 +35,9 @@ export function getAuthServiceConfigs() {
         SearchComponent,
         LoginComponent,
         DatabaseComponent,
+        GroupsComponent,
+        FriendsComponent,
+        ProfileComponent
     ],
     imports: [
         BrowserModule,

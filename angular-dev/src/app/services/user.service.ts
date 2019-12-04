@@ -25,9 +25,11 @@ export class UserService {
      * leaveGroup(userID:string, groupID:string)
      */
 
+
+    private databaseUrl: String = "http://54.164.165.203/";
     //returns an observable list of all users in the database
     public getAllUsers(): Observable<User[]> {
-        return this.http.get<User[]>("https://54.164.165.203/showUsers.php").pipe(
+        return this.http.get<User[]>(this.databaseUrl+"showUsers.php").pipe(
             map(data => data.map(data => new User().deserialize(data))));
     }
 
@@ -37,7 +39,7 @@ export class UserService {
      * or it will return an array of size 1 containing the user.
      */
     public getUserByID(id: string): Observable<User[]> {
-        return this.http.get<User[]>("https://54.164.165.203/getUserByID.php", {
+        return this.http.get<User[]>(this.databaseUrl +"getUserByID.php", {
             params: {
                 "id": id
             }
@@ -52,7 +54,7 @@ export class UserService {
 
         //TODO: Verify SocialUser data isnt garbage
 
-        this.http.get("https://54.164.165.203/createUser.php", {
+        this.http.get(this.databaseUrl +"createUser.php", {
             params: {
                 "id": user.id,
                 "name": user.name,
@@ -73,7 +75,7 @@ export class UserService {
             console.log("UpdateToken Function on UID " + userID + " w/ + " + token + " completed:");
             console.log(result);
         }
-        this.http.get("https://54.164.165.203/updateToken.php", {
+        this.http.get(this.databaseUrl +"updateToken.php", {
             params: {
                 "id": userID,
                 "token": token
@@ -90,7 +92,7 @@ export class UserService {
 
         //TODO: Verify userID and friendID before sending to backend
 
-        this.http.get("https://54.164.165.203/addFriend.php", {
+        this.http.get(this.databaseUrl +"addFriend.php", {
             params: {
                 "uid": userID,
                 "fid": friendID
@@ -106,7 +108,7 @@ export class UserService {
 
         //TODO: Verify userID and friendID before sending to backend
 
-        this.http.get("https://54.164.165.203/removeFriend.php", {
+        this.http.get(this.databaseUrl +"removeFriend.php", {
             params: {
                 "uid": userID,
                 "fid": friendID
@@ -123,7 +125,7 @@ export class UserService {
 
         //TODO: Verify userID and friendID before sending to backend
 
-        this.http.get("https://54.164.165.203/joinGroup.php", {
+        this.http.get(this.databaseUrl +"joinGroup.php", {
             params: {
                 "uid": userID,
                 "gid": groupID
@@ -139,7 +141,7 @@ export class UserService {
 
         //TODO: Verify userID and friendID before sending to backend
 
-        this.http.get("https://54.164.165.203/leaveGroup.php", {
+        this.http.get(this.databaseUrl +"leaveGroup.php", {
             params: {
                 "uid": userID,
                 "gid": groupID
