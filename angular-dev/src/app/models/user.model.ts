@@ -3,8 +3,8 @@ export class User {
     name: string;
     token: string;
     email: string;
-    friends: number[];
-    groups: number[];
+    friends: string[];
+    groups: string[];
 
     deserialize(input: any) {
         Object.assign(this, input);
@@ -17,7 +17,7 @@ export class User {
             "name: " + this.name + "," +
             "token: " + this.token + "," +
             "email: " + this.email + "," +
-            "friends: " + this.friends.toString() + "," +
-            "groups: " + this.groups.toString() + "}";
+            "friends: [" + this.friends.toString() + "] ," +
+            "groups: [" + this.groups.toString() + "]}";
     }
 }

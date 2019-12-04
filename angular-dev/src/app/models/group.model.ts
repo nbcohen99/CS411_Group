@@ -14,6 +14,6 @@ export class Group {
             "id: " + this.id + "," +
             "name: " + this.name + "," +
             "ownerID: " + this.ownerID + "," +
-            "userIDs: " + this.userIDs + "}";
+            "userIDs: [" + this.userIDs + "]}";
     }
 }

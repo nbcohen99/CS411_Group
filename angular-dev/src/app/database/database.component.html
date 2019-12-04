@@ -1,5 +1,6 @@
 <button (click)="getUsers()">GetAllUsers</button>
-
+<button (click)="getGroups()">GetAllGroups</button>
+<button (click)="getGroupByTheID(searchInput.value)">GroupSearchByID</button>
 <input #searchInput placeholder="Enter id here" (keyup.enter)="getUserByTheID(searchInput.value)">
-<button (click)="getUserByTheID(searchInput.value)">SearchByID</button>
+<button (click)="getUserByTheID(searchInput.value)">UserSearchByID</button>
 <div class="multi_lines_text">{{ data }}</div>

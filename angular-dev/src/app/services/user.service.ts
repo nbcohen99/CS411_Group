@@ -23,6 +23,9 @@ export class UserService {
      * removeFriend(userID:string, friendID:string)
      * joinGroup(userID:string, groupID:string)
      * leaveGroup(userID:string, groupID:string)
+     * 
+     * 
+     * 
      */
 
 
@@ -53,15 +56,14 @@ export class UserService {
     public makeNewUser(user: SocialUser) {
 
         //TODO: Verify SocialUser data isnt garbage
-
-        this.http.get(this.databaseUrl +"createUser.php", {
+        this.http.get(this.databaseUrl + "createUser.php", {
             params: {
                 "id": user.id,
                 "name": user.name,
                 "token": user.idToken,
                 "email": user.email
             }
-        });
+        }).subscribe(data => { console.log(data); });
     }
 
     /*
@@ -92,7 +94,7 @@ export class UserService {
 
         //TODO: Verify userID and friendID before sending to backend
 
-        this.http.get(this.databaseUrl +"addFriend.php", {
+        return this.http.get(this.databaseUrl +"addFriend.php", {
             params: {
                 "uid": userID,
                 "fid": friendID
@@ -108,7 +110,7 @@ export class UserService {
 
         //TODO: Verify userID and friendID before sending to backend
 
-        this.http.get(this.databaseUrl +"removeFriend.php", {
+        return this.http.get(this.databaseUrl +"removeFriend.php", {
             params: {
                 "uid": userID,
                 "fid": friendID
@@ -125,7 +127,7 @@ export class UserService {
 
         //TODO: Verify userID and friendID before sending to backend
 
-        this.http.get(this.databaseUrl +"joinGroup.php", {
+        return this.http.get(this.databaseUrl +"joinGroup.php", {
             params: {
                 "uid": userID,
                 "gid": groupID
@@ -140,13 +142,17 @@ export class UserService {
     public leaveGroup(userID: string, groupID: string) {
 
         //TODO: Verify userID and friendID before sending to backend
-
-        this.http.get(this.databaseUrl +"leaveGroup.php", {
+        console.log("Leaving..");
+        return this.http.get(this.databaseUrl + "leaveGroup.php", {
             params: {
                 "uid": userID,
                 "gid": groupID
             }
         });
     }
+
+
+
+   
 
 }
