@@ -7,7 +7,9 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    
     <title>USER</title>
   </head>
   <style>
@@ -26,6 +28,10 @@
         background-color: #afd189;
         color: #ffffff;
       }
+      .bg-4 {
+        background-color: #9fbf7b;
+        color: #ffffff;
+      }
 
 
       .container-fluid {
@@ -39,6 +45,18 @@
       .container-fluid-small {
         padding-top: 12px;
         padding-bottom: 12px;
+      }
+      .container-fluid-pick {
+        padding-top: 24px;
+        padding-bottom: 1px;
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      .container-fluid-pick-link {
+        padding-top: 1px;
+        padding-bottom: 12px;
+        padding-left: 12px;
+        padding-right: 12px;
       }
 
       .navbar {
@@ -294,7 +312,7 @@
 
     </div>
     <!-- CHOOSE -->
-    <div class="container-fluid bg-3">
+    <div class="container-fluid-pick bg-3">
       <form>
         <div class="form-group">
           <label for="select">Choose from the following:</label>
@@ -312,18 +330,37 @@
             <option>10</option>
           </select>
         </div>
-        <!-- YELP LINK GOES HERE -->
-        <a href="https:www.yelp.com">
-          <img alt="yelplogo" class="rounded-circle" src="assets/img/yelplogo.png"
-          width="50" height="50">
-       </a>
-       <!-- LYFT LINK GOES HERE -->
-       <a href="https:www.lyft.com">
-          <img alt="lyftlogo" style="object-fit: cover;" class="rounded-circle" src="assets/img/lyftlogo.png"
-          width="50" height="50">
-       </a>
       </form>
     </div>
+    <!-- LINKS -->
+    <div class="container-fluid-pick-link bg-3 text-right">
+      <!-- YELP LINK GOES HERE -->
+      <a href="https:www.yelp.com" target="_blank">
+        <img alt="yelplogo" class="rounded-circle text-right" src="assets/img/yelplogo.png"
+        width="50" height="50">
+      </a>
+      <!-- LYFT LINK GOES HERE -->
+      <a href="https:www.lyft.com" target="_blank">
+        <img alt="lyftlogo" style="object-fit: cover;" class="rounded-circle" src="assets/img/lyftlogo.png"
+        width="50" height="50">
+      </a>      
+    </div>
+    <!-- ENTER AMOUNT FOR RESTAURANT BILL -->
+    <div class="container-fluid bg-4">
+      <label for="select">Total amount + Tip:</label>
+      <form>
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+          <input type="text" class="form-control" placeholder="0.00">
+          <div class="input-group-append">
+              <button class="btn btn-default" style="background-color: #6E757D; color:#ffffff"type="submit">Send</button>
+            </div>
+        </div>
+      </form>
+    </div>
+
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
