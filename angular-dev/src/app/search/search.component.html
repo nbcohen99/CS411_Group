@@ -1,4 +1,24 @@
-<input #searchInput placeholder="Enter your search term" (keyup.enter)="searchYelp(searchInput.value)">
-<button (click)="searchYelp(searchInput.value)">Search</button>
+<input class="textField" #searchInput placeholder="Search Term" (keyup.enter)="searchYelp(searchInput.value)">
 
-<div class="multi_lines_text">{{ data }}</div>
+<div class="inputAddress">
+    <input 
+        [(ngModel)]="currentAddress"
+        #searchLyftInput placeholder="Enter your current location for Lyft" 
+        (keyup.enter)="searchYelp(searchInput.value, searchLyftInput.value, true)"
+    >
+
+</div>
+<div>    
+    <button (click)="searchYelp(searchInput.value, searchLyftInput.value, true)">Enter </button>
+    <button (click)="searchYelp(searchInput.value, searchLyftInput.value, false)">Use Current Location </button>
+</div>
+
+
+<div > 
+    <p class="business_names" *ngFor="let business of yelpNames; let i = index" (click)="getLyftResults(yelpAddresses[i])" >
+        {{ business }}
+    </p>
+    <p *ngFor="let estimate of lyftEstimatesData">
+        {{ estimate }}
+    </p>
+</div>

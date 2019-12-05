@@ -1,3 +1,14 @@
 .multi_lines_text { 
     white-space: pre-line; 
 }
+
+.business_names {
+    margin-bottom: 10px;
+    cursor: pointer;
+    color: #0000EE;
+    text-decoration: underline;
+}
+
+.inputAddress input{
+    width: 300px;
+}
