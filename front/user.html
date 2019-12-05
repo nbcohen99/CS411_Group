@@ -14,7 +14,7 @@
   </head>
   <style>
       html * {
-        font-family: 'Source Sans Pro', sans-serif;
+        font-family: 'Source Sans Pro', sans-serif !important;
       }
       .bg-1 {  
         background-color: #4a5d34;
@@ -36,7 +36,7 @@
 
       .container-fluid {
         padding-top: 24px;
-        padding-bottom: 24px;
+        padding-bottom: 30px;
       }
       .container-fluid-footer {
         padding-top: 36px;
@@ -57,6 +57,13 @@
         padding-bottom: 12px;
         padding-left: 12px;
         padding-right: 12px;
+      }
+      .container-fluid-filter {
+        padding-top: 24px;
+        padding-bottom: 1px;
+      }
+      .container-fluid-search {
+        padding-bottom: 24px;
       }
 
       .navbar {
@@ -111,7 +118,7 @@
     </nav>
     <div class="container-fluid-small"></div>
     <!-- FILTER -->
-    <div class="container-fluid bg-2 text-center">
+    <div class="container-fluid-filter bg-2 text-center">
       <!-- DISTANCE -->
       <div class="btn-group btn-group-toggle" data-toggle="buttons">
         <label class="btn btn-secondary active">
@@ -309,8 +316,23 @@
             </div>
           </div>
         </div>
-
+        <br><br>
+        <div class="row">
+          <div class="col text-left" style="padding-left: 118px;">
+            <div class="input-group" style="width:138px;">
+              <div class="input-group-prepend">
+                <span class="input-group-text"># People</span>
+              </div> 
+              <input type="text" class="form-control" placeholder="1-6" >
+            </div>
+          </div>
+          <div class="col text-right" style="padding-right: 118px;">
+              <button type="button" style="background-color:#f14e4e" class="btn btn-primary">Search</button>
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="container-fluid-small bg-2"></div>
     <!-- CHOOSE -->
     <div class="container-fluid-pick bg-3">
       <form>
@@ -318,35 +340,77 @@
           <label for="select">Choose from the following:</label>
           <select multiple class="form-control" id="select">
             <!-- INSERT RESTAURANT NAMES -->
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-            <option>7</option>
-            <option>8</option>
-            <option>9</option>
-            <option>10</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
           </select>
         </div>
       </form>
     </div>
     <!-- LINKS -->
     <div class="container-fluid-pick-link bg-3 text-right">
-      <!-- YELP LINK GOES HERE -->
-      <a href="https:www.yelp.com" target="_blank">
-        <img alt="yelplogo" class="rounded-circle text-right" src="assets/img/yelplogo.png"
-        width="50" height="50">
-      </a>
-      <!-- LYFT LINK GOES HERE -->
-      <a href="https:www.lyft.com" target="_blank">
-        <img alt="lyftlogo" style="object-fit: cover;" class="rounded-circle" src="assets/img/lyftlogo.png"
-        width="50" height="50">
-      </a>      
+      <div class="row">
+        <div class="col-8">
+            <form>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Type of Ride</span>
+                    </div>
+                    <label type="text" class="form-control" aria-label="" disabled></label>
+                    <div class="input-group-append">
+                        <span class="input-group-text">Min Ride</span>
+                    </div>
+                    <label type="text" class="form-control" aria-label="" disabled></label>
+                    <div class="input-group-append">
+                        <span class="input-group-text">Max Ride </span>
+                    </div>
+                    <label type="text" class="form-control" aria-label="" disabled></label>
+                    <div class="input-group-append">
+                        <span class="input-group-text">Est. Time</span>
+                    </div>
+                    <label type="text" class="form-control" aria-label="" disabled></label>
+                </div>
+            </form>
+        </div>
+        <div class="col-4">
+          <!-- YELP LINK GOES HERE -->
+          <a href="https:www.yelp.com" target="_blank">
+            <img alt="yelplogo" class="rounded-circle text-right" src="assets/img/yelplogo.png" width="50" height="50">
+          </a>
+          <!-- LYFT LINK GOES HERE -->
+          <a href="https:www.lyft.com" target="_blank">
+            <img alt="lyftlogo" style="object-fit: cover;" class="rounded-circle" src="assets/img/lyftlogo.png" width="50" height="50">
+          </a>  
+        </div>
+      </div>
+
     </div>
-    <!-- ENTER AMOUNT FOR RESTAURANT BILL -->
+    <!-- ENTER VENMO USERNAME & AMOUNT FOR RESTAURANT BILL -->
     <div class="container-fluid bg-4">
+      <div class="row">
+        <div class="col">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">@</span>
+                </div>
+              <input type="text" class="form-control" placeholder="Venmo Username">
+            </div>
+        </div>
+        <div class="col text-right">
+            <button type="button" style="background-color: #6E757D; border:#6E757D;"class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+                Members
+            </button>
+        </div>
+      </div>
+        
+      <br>
       <label for="select">Total amount + Tip:</label>
       <form>
         <div class="input-group">
@@ -355,6 +419,7 @@
             </div>
           <input type="text" class="form-control" placeholder="0.00">
           <div class="input-group-append">
+              <!-- ADD JQUERY TO THIS -->
               <button class="btn btn-default" style="background-color: #6E757D; color:#ffffff"type="submit">Send</button>
             </div>
         </div>
