@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+        <!-- Google Font Linking -->
+        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+
+    <title>Bill the Split</title>
+    <style>
+      html * {
+        font-family: 'Source Sans Pro', sans-serif;
+      }
+      .bg-1 {  
+        background-color: #4a5d34;
+        color: #ffffff;
+      }
+      .bg-2 {
+        background-color: #bee494;
+        color: #ffffff;
+      }
+      .bg-3 {
+        background-color: #4a5d34;
+        color: #ffffff;
+      }
+      
+      .container-fluid {
+        padding-top: 48px;
+        padding-bottom: 48px;
+      }
+      .container-fluid-footer {
+        padding-top: 36px;
+        padding-bottom: 36px;
+      }
+
+      /* Button */
+      button {
+        background-color: #39442b;
+        color: white;
+        padding: 10px 24px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+      }
+      button:hover {
+        opacity: 80%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-fluid bg-1 text-center">
+      <h1>Welcome to Bill the Split</h1>
+      <br>
+      <img src="./assets/img/logo.png" class="rounded-circle" alt="logo" width="300" height="300">
+      <br><br>
+      <h4>A web app that allows a user to easily split a bill and bill the split</h4>
+      <p>BTS provides an easy solution to splitting costs from a group outing starting 
+         with the car ride to the restaurant to the check at the restaurant. It utilizes the Yelp API
+         by taking user input filters and providing local restaurant recommendations, and ranks them 
+         based on estimated travel time and cost pulled from the Lyft API. A user can then push Venmo pay requests
+         to members of the group for the car ride, and after their meal, do the same for the check.
+      </p>
+      <br>
+      <!-- ADD OAUTH HERE -->
+      <button type="login" class="button btn-block">Log in with Google</button>
+    </div>
+    <div class="container-fluid-footer bg-2 text-center">
+      <p>CS411 Group 1: Wyatt Howe, Noah Cohen, Michelle Lee, Andre Pires</p>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
