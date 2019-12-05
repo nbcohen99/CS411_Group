@@ -1,3 +1,10 @@
 .multi_lines_text { 
     white-space: pre-line; 
 }
+
+.business_names {
+    margin: 10px;
+    cursor: pointer;
+    color: #0000EE;
+    text-decoration: underline;
+}
