@@ -8,3 +8,7 @@
     color: #0000EE;
     text-decoration: underline;
 }
+
+.inputAddress input{
+    width: 300px;
+}

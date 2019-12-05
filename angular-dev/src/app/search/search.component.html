@@ -1,7 +1,8 @@
-<input #searchInput placeholder="Search Term" (keyup.enter)="searchYelp(searchInput.value)">
+<input class="textField" #searchInput placeholder="Search Term" (keyup.enter)="searchYelp(searchInput.value)">
 
-<div>
+<div class="inputAddress">
     <input 
+        [(ngModel)]="currentAddress"
         #searchLyftInput placeholder="Enter your current location for Lyft" 
         (keyup.enter)="searchYelp(searchInput.value, searchLyftInput.value, true)"
     >

@@ -17,10 +17,16 @@ export class SearchComponent implements OnInit {
   lyftEstimatesData: string[];
 
   enteredCurrentLocation: boolean = false;
+  enteredAddress: string;
   currentAddress: string;
   currentLat: number;
   currentLong: number;
+  destinationLat: number;
+  destinationLong: number;
   currentLocation: any;
+  
+
+  lyftDeepLink: string;
 
   constructor(
     private yelpSearch: YelpSearchService,
@@ -35,7 +41,7 @@ export class SearchComponent implements OnInit {
   searchYelp(query: string, currentLocation: string, currentLocationEntered: boolean) {
     
     if (currentLocationEntered) {
-      this.currentAddress = currentLocation;
+      this.enteredAddress = currentLocation;
       this.enteredCurrentLocation = true;
     }
     else {
@@ -46,6 +52,11 @@ export class SearchComponent implements OnInit {
     this.yelpAddresses = [];
     this.lyftEstimates = [];
     this.lyftEstimatesData = [""];
+    this.currentLat = null;
+    this.currentLong = null;
+    this.destinationLat = null;
+    this.destinationLong = null;
+
     this.yelpSearch.getData(query).subscribe(
       (data: any) => {
         for (var i = 0; i < 20; i++) {
@@ -69,7 +80,7 @@ export class SearchComponent implements OnInit {
     this.lyftEstimates = [];
     this.lyftEstimatesData = [""];
     if (this.enteredCurrentLocation) {
-      this.getCurrentLocation(this.currentAddress, destinationAddress);
+      this.getCurrentLocation(this.enteredAddress, destinationAddress);
     }
     else{
       this.addressLyft(destinationAddress);
@@ -88,6 +99,7 @@ export class SearchComponent implements OnInit {
         location = data;
         this.currentLat = location.lat;
         this.currentLong = location.lng;
+        this.currentAddress = location.routable_address;
 
         this.addressLyft(destinationAddress);
 
@@ -127,8 +139,7 @@ export class SearchComponent implements OnInit {
           var minutes = this.lyftEstimates[i].estimated_duration_seconds / 60;
           var minDecimalIndex = minutes.toString().indexOf(".");
           var seconds = this.lyftEstimates[i].estimated_duration_seconds -
-            (parseInt(minutes.toString().substring(0, minDecimalIndex)) * 60)
-          var secDecimalIndex = seconds.toString().indexOf(".");
+            (parseInt(minutes.toString().substring(0, minDecimalIndex)) * 60);
           this.lyftEstimatesData.push("name = " + this.lyftEstimates[i].display_name +
             " ---------- estimated price: $" + this.lyftEstimates[i].estimated_cost_cents_min / 100 +
             " to $" + this.lyftEstimates[i].estimated_cost_cents_max / 100 +
@@ -153,10 +164,6 @@ export class SearchComponent implements OnInit {
       )
     }
 
-
-
-
-
     // Uses Lyft API to get full address, Long, Lat of given address
     var location = { display_address: null, lat: null, lng: null, place_id: null, routable_address: null }
     this.lyftSearch.getLatLong(address).subscribe(
@@ -164,16 +171,34 @@ export class SearchComponent implements OnInit {
 
 
         location = data;
-        var resultsLat = location.lat;
-        var resultsLong = location.lng;
+        this.destinationLat = location.lat;
+        this.destinationLong = location.lng;
+        
 
 
-        this.estimateLyft(this.currentLat, this.currentLong, resultsLat, resultsLong)
+        this.estimateLyft(this.currentLat, this.currentLong, this.destinationLat, this.destinationLong)
 
       }
     );
 
 
+  }
+
+  getLyftLink(rideType: string) {
+    var lyftDeep = "lyft://ridetype";
+    return lyftDeep + 
+      "?id=" + rideType + 
+      "&pickup[latitude]=" + this.currentLat +
+      "&pickup[longitude]=" + this.currentLong +
+      "&destination[latitude]=" + this.destinationLat +
+      "&destination[longitude]=" + this.destinationLong;
+
+  }
+
+  splitCheck(amount:number, groupSize:number, username:string) {
+    var amountPerPerson = amount / groupSize;
+    var venmoDeep = "venmo://paycharge?charge=pay&recipients=";
+    return venmoDeep + username + "&amount=" + amountPerPerson + "&note=Lyft ride using Splitcheck";
   }
 
 }
