@@ -24,7 +24,9 @@ export class LyftSearchService {
       .set("end_lat", endLat)
       .set("end_lng", endLong);
 
-    return this.http.get(this.lyftUrl + '/costs', {
+    
+
+    return this.http.get("http://54.164.165.203/lyftEstimates.php?", {
       params: reqParams
     });
 
@@ -37,7 +39,7 @@ export class LyftSearchService {
       .set("address", address.replace(" ", "+"));
 
 
-    return this.http.get(this.lyftUrl + "/geocode", {
+    return this.http.get("http://54.164.165.203/lyftAddress.php?", {
       params: reqParams
     })
   }

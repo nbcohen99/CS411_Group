@@ -113,12 +113,12 @@ export class SearchComponent implements OnInit {
 
 
 
-  estimateLyft(start_lat, start_long, end_lat, end_long) {
+  estimateLyft(start_lat:string, start_long, end_lat, end_long) {
     // Gets price and time estimates for several Lyft options
 
     //var sample_coords = ["42.3496428", "-71.0943789", "42.349341", "-71.1039816"];
 
-    this.lyftSearch.getPriceEstimate(start_lat, start_long, end_lat, end_long).subscribe(
+    this.lyftSearch.getPriceEstimate(start_lat.substring(0, 9), start_long.substring(0, 9), end_lat.substring(0, 9), end_long.substring(0, 9)).subscribe(
       (data: any) => {
         // TODO: build interface for returned data
         var trip = {
@@ -176,7 +176,12 @@ export class SearchComponent implements OnInit {
         
 
 
-        this.estimateLyft(this.currentLat, this.currentLong, this.destinationLat, this.destinationLong)
+        this.estimateLyft(
+          this.currentLat.toString(), 
+          this.currentLong.toString(), 
+          this.destinationLat.toString(), 
+          this.destinationLong.toString()
+        )
 
       }
     );
