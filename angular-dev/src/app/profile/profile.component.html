@@ -1,123 +1,382 @@
 ﻿<!doctype html>
+<style>
+    html * {
+        font-family: 'Source Sans Pro', sans-serif;
+    }
+
+    .bg-1 {
+        background-color: #4a5d34;
+        color: #ffffff;
+    }
+
+    .bg-2 {
+        background-color: #bee494;
+        color: #ffffff;
+    }
+
+    .bg-3 {
+        background-color: #afd189;
+        color: #ffffff;
+    }
+
+    .bg-4 {
+        background-color: #9fbf7b;
+        color: #ffffff;
+    }
+
+
+    .container-fluid {
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+
+    .container-fluid-footer {
+        padding-top: 36px;
+        padding-bottom: 36px;
+    }
+
+    .container-fluid-small {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .container-fluid-pick {
+        padding-top: 24px;
+        padding-bottom: 1px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .container-fluid-pick-link {
+        padding-top: 1px;
+        padding-bottom: 12px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .navbar {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        border: 0;
+        border-radius: 0;
+        margin-bottom: 0;
+        font-size: 12px;
+        letter-spacing: 5px;
+        background-color: #4a5d34 !important;
+    }
+    /* Navbar items to the right */
+    .ml-auto .dropdown-menu {
+        left: auto !important;
+        right: 0px;
+    }
+
+    .navbar-nav li a:hover {
+        color: #bee494 !important;
+    }
+
+    /* Navtab colors */
+    .nav li a {
+        color: #4a5d34 !important;
+    }
+
+    .nav-tabs li.active a, .nav-tabs li.active a:focus, .nav-tabs li.active a:hover {
+        background-color: #bee494 !important;
+        border-bottom-color: transparent !important;
+        border-color: #4a5d34;
+    }
+
+    .nav-tabs {
+        border-bottom-color: #4a5d34 !important;
+    }
+
+    .modal-body {
+        color: black;
+    }
+</style>
 <html lang="en">
-  <head>
+<head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-    <!-- Google Font Linking -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    
     <title>USER</title>
-    <style>
-        html * {
-            font-family: 'Source Sans Pro', sans-serif;
-        }
-        .bg-1 {
-            background-color: #ffffff;
-            color: #154360; 
-        }
-        .bg-2 {
-            background-color: #45b39d;
-            color: #ffffff;
-        }
+</head>
 
-        .container {
-            padding: 15px;
-        }
-        .container-fluid {
-            padding-top: 48px;
-            padding-bottom: 48px;
-        }
-        .container-fluid-footer {
-            padding-top: 36px;
-            padding-bottom: 36px;
-        }
-        .container-fluid-header {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            padding-left: 12px;
-        }
-        
-        .navbar {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            border: 0;
-            border-radius: 0;
-            margin-bottom: 0;
-            font-size: 12px;
-            letter-spacing: 5px;
-            background-color: #154360 !important;
-        }
-        /* Navbar items to the right */
-        .ml-auto .dropdown-menu {
-            left: auto !important;
-            right: 0px;
-        }
-        .navbar-nav li a:hover {
-            color: #45b39d !important;
-        }
-
-    </style>
-  </head>
-  <body>
+<body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" routerLink="/">
-            <img src="assets/img/logoblue.png" class="rounded-circle" alt="Logo" style="width: 40px;">
+        <a class="navbar-brand" href="user.html">
+            <img src="assets/img/logo.png" class="rounded-circle" alt="logo" style="width: 40px;">
         </a>
+        <h2>USER's Splits</h2>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" routerLink="/search" routerLinkActive="active">SEARCH</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/friends" routerLinkActive="active">FRIENDS</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/groups" routerLinkActive="active">GROUPS</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/database" routerLinkActive="active">DEV-DATABASE</a>
+                <a class="nav-link" href="index.html">LOGOUT</a>
             </li>
         </ul>
-
     </nav>
-    <div class="container-fluid-header bg-1 text-left">
-            <h2 class="margin">PROFILE</h2>
-    </div>
-    <div class="container-fluid bg-2">
-        <div class="row">
-            <div class="col-sm-4 text-center">
-                <img src="assets/img/iconblue.png" class="img-responsive img-circle margin" style="border: 3px solid #154360; display:inline" alt="Icon" width="200" height="200">
-                <h3>{{ fullName }}</h3>
-            </div>
-            <div class="col-sm-4 text-center">
-                <img src="assets/img/uniconblue.png" class="img-responsive img-circle margin" style="border: 3px solid #154360; display: inline;" alt="UN" width="200" height="200">
-                <h3>{{ friends }} FRIENDS</h3>
-            </div>
-            <div class="col-sm-4 text-center">
-                <img src="assets/img/asbiconblue.png" class="img=img-responsive img-circle margin" style="border: 3px solid #154360; display: inline;" alt="AS" width="200" height="200">
-                <h3>{{ groups }} GROUPS</h3>
+    <div class="container-fluid-small"></div>
+    <!-- FILTER -->
+    <div class="container-fluid bg-2 text-center">
+        <!-- DISTANCE -->
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+                <input type="radio" name="options" id="Bird's-eye View" autocomplete="off" checked> Bird's-eye View
+            </label>
+            <label class="btn btn-secondary">
+                <input type="radio" name="options" id="Driving" autocomplete="off"> Driving (5 mi.)
+            </label>
+            <label class="btn btn-secondary">
+                <input type="radio" name="options" id="Biking" autocomplete="off"> Biking (2  mi.)
+            </label>
+            <label class="btn btn-secondary">
+                <input type="radio" name="options" id="Walking" autocomplete="off"> Walking (1 mi.)
+            </label>
+            <label class="btn btn-secondary">
+                <input type="radio" name="options" id="Within 4 blocks" autocomplete="off"> Within 4 blocks
+            </label>
+        </div>
+        <!-- PRICE -->
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-secondary active">
+                <input type="checkbox" autocomplete="off"> $
+            </label>
+            <label class="btn btn-secondary active">
+                <input type="checkbox" autocomplete="off"> $$
+            </label>
+            <label class="btn btn-secondary active">
+                <input type="checkbox" autocomplete="off"> $$$
+            </label>
+            <label class="btn btn-secondary active">
+                <input type="checkbox" autocomplete="off"> $$$$
+            </label>
+        </div>
+        <!-- CATEGORIES -->
+        <!-- Button trigger modal -->
+        <button type="button" style="background-color: #6E757D; border:#6E757D;" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+            Categories
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+                        <label type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </label>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col text-left">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Coffee & Tea"> Coffee & Tea</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Sandwiches"> Sandwiches</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Italian"> Italian</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Seafood"> Seafood</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Pizza"> Pizza</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Salad"> Salad</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Chinese"> Chinese</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Cafe"> Cafe</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Mexican"> Mexican</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Food Trucks"> Food Trucks</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Japanese"> Japanese</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Desserts"> Desserts</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Delis"> Delis</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Burgers"> Burgers</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Fast Food"> Fast Food</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Ice Cream & Frozen Yogurt"> Ice Cream & Frozen Yogurt</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Mediterranean"> Mediterranean</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Asian Fusion"> Asian Fusion</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Latin American"> Latin American</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Steakhouses"> Steakhouses</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="French"> French</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Middle Eastern"> Middle Eastern</label>
+                                </div>
+
+                            </div>
+                            <div class="col text-left">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Food Stands"> Food Stands</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Thai"> Thai</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Bubble Tea"> Bubble Tea</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Indian"> Indian</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Vegan"> Vegan</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Soup"> Soup</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Vegetarian"> Vegetarian</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Greek"> Greek</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Vietnamese"> Vietnamese</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Barbeque"> Barbeque</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Bagels"> Bagels</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Columbian"> Columbian</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Diners"> Diners</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Food Delivery Services"> Food Delivery Services</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Chicken Wings"> Chickens Wings</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Irish"> Irish</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Halal"> Halal</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Ramen"> Ramen</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Street Vendors"> Street Vendors</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Gluten-Free"> Gluten-Free</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Korean"> Korean</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="Southern"> Southern</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" style="background-color: #6E757D;" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                        <button type="button" style="background-color:#f14e4e" class="btn btn-primary">Search</button>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
-    <div class="container-fluid-header bg-1 text-left">
+    <!-- CHOOSE -->
+    <div class="container-fluid-pick bg-3">
+        <form>
+            <div class="form-group">
+                <label for="select">Choose from the following:</label>
+                <select multiple class="form-control" id="select">
+                    <!-- INSERT RESTAURANT NAMES -->
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                </select>
+            </div>
+        </form>
     </div>
-    <div class="container-fluid bg-2">
-        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure, repellat, pariatur illo, provident earum aspernatur eos dignissimos commodi harum rerum quis dolor ea! Vitae debitis non veniam nam pariatur! Accusamus?</p>
+    <!-- LINKS -->
+    <div class="container-fluid-pick-link bg-3 text-right">
+        <!-- YELP LINK GOES HERE -->
+        <a href="https:www.yelp.com" target="_blank">
+            <img alt="yelplogo" class="rounded-circle text-right" src="assets/img/yelplogo.png"
+                 width="50" height="50">
+        </a>
+        <!-- LYFT LINK GOES HERE -->
+        <a href="https:www.lyft.com" target="_blank">
+            <img alt="lyftlogo" style="object-fit: cover;" class="rounded-circle" src="assets/img/lyftlogo.png"
+                 width="50" height="50">
+        </a>
+    </div>
+    <!-- ENTER AMOUNT FOR RESTAURANT BILL -->
+    <div class="container-fluid bg-4">
+        <label for="select">Total amount + Tip:</label>
+        <form>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                </div>
+                <input type="text" class="form-control" placeholder="0.00">
+                <div class="input-group-append">
+                    <button class="btn btn-default" style="background-color: #6E757D; color:#ffffff" type="submit">Send</button>
+                </div>
+            </div>
+        </form>
     </div>
 
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
 </html>

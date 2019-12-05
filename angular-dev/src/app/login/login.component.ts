@@ -92,9 +92,12 @@ export class LoginComponent implements OnInit {
                         
                     } 
                     //Update cookies with new token
+                    //declare date and get current date time
+                    var date = new Date();
+                    date.setTime(date.getTime() + (20 * 60 * 1000));
                     this.userService.updateToken(userData.id, result.token);
-                    this.cookieService.set('user-id', userData.id);
-                    this.cookieService.set('token', result.token);
+                    this.cookieService.set('user-id', userData.id, { 'expires': date });
+                    this.cookieService.set('token', result.token, { 'expires': date });
 
                     console.log(result.token);
                     console.log("Saved user in cookies");
