@@ -37,6 +37,7 @@ export class SearchComponent implements OnInit {
 
   categories: string[]; // Filters for yelp searching
   priceFilter: string[];
+  defaultPriceFilter: boolean;
   radiusFilter: number;
 
   activeDistanceButton: boolean[]; // array to determine which distance button is active
@@ -66,6 +67,7 @@ export class SearchComponent implements OnInit {
     this.estimatesReady = false;
     this.activeDistanceButton = [false, false, false, false, false];
     this.activePriceButton = [false, false, false, false];
+    this.priceFilter = [];
 
 
     var uid = this.cookieService.get("user-id");
@@ -127,6 +129,8 @@ export class SearchComponent implements OnInit {
 
   // calls backend to get Yelp list of restaurants based on filters
   searchYelp(categories: string, currentLocation: string, currentLocationEntered: boolean) {
+
+    // resets displayed data
     this.yelpNames = [];
     this.yelpAddresses = [];
     this.lyftEstimates = [];
@@ -146,11 +150,12 @@ export class SearchComponent implements OnInit {
 
 
     // if user did not select any prices
-    if (this.priceFilter == null) {
+    if (this.priceFilter == null || this.priceFilter.length == 0) {
+      this.defaultPriceFilter = true;
       this.priceFilter = ["1", "2", "3", "4"];
     }
     // default radius to 2 miles
-    if (this.radiusFilter == null) {
+    if (this.radiusFilter == null || this.radiusFilter) {
       this.radiusFilter = 3218;
     }
     this.yelpSearch.getData(categories, this.priceFilter.toString(), this.radiusFilter).subscribe(
@@ -166,6 +171,12 @@ export class SearchComponent implements OnInit {
           // send returned data to displayed data
           this.yelpNames.push(business.name);
           this.yelpAddresses.push(business.location.display_address[0] + business.location.display_address[1]);
+
+          // if default was used, reset price filter
+          if (this.defaultPriceFilter) {
+            this.defaultPriceFilter = false;
+            this.priceFilter = [];
+          }
           // }
         }
 
@@ -351,6 +362,8 @@ export class SearchComponent implements OnInit {
 
     if (this.activeDistanceButton[index]) {
       this.activeDistanceButton[index] = false;
+      // Set to 2 miles for default
+      this.radiusFilter = 3218;
     }
     else {
       for (var i = 0; i < 5; i++) {
@@ -366,14 +379,14 @@ export class SearchComponent implements OnInit {
   updateActivePrice(index: number) {
 
     if (this.activePriceButton[index]) {
-      var index2 = this.priceFilter.indexOf(index.toString(), 0);
+      var index2 = this.priceFilter.indexOf((index + 1).toString(), 0);
       this.priceFilter = this.priceFilter.slice(0, index2).concat(this.priceFilter.slice(index2 + 1));
 
       // replace element in active buttons
       this.activePriceButton.splice(index, 1, false);
     }
     else {
-      this.priceFilter.push(index.toString());
+      this.priceFilter.push((index + 1).toString());
       for (var i = 0; i < 4; i++) {
         if (i === index) {
           this.activePriceButton[i] = true;

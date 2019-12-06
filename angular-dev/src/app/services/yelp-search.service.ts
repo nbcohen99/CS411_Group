@@ -27,7 +27,7 @@ export class YelpSearchService {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + token
     });
-    return this.http.get("http://54.164.165.203/yelp.php?businesses/search?", {  //"https://api.yelp.com/v3/businesses/search", {
+    return this.http.get("http://54.164.165.203/yelp.php?", {  //"https://api.yelp.com/v3/businesses/search", {
       headers: reqHeader,
       params: {
         "location": "boston",
