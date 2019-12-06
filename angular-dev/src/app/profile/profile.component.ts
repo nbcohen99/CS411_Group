@@ -3,6 +3,7 @@ import { UserService } from '../services/user.service';
 import { User } from '../models/user.model';
 import { CookieService } from 'ngx-cookie-service';
 import { Router } from '@angular/router';
+import { LogoutService } from '../services/logout.service';
 @Component({
     selector: 'app-profile',
     templateUrl: './profile.component.html',
@@ -16,7 +17,8 @@ export class ProfileComponent implements OnInit {
     constructor(
         private userService: UserService,
         private cookieService: CookieService,
-        private redirect: Router
+        private redirect: Router,
+        private logOutService: LogoutService
         ) { }
 
     ngOnInit() {
@@ -39,6 +41,10 @@ export class ProfileComponent implements OnInit {
         });
 
 
+    }
+
+    public logOut() {
+        this.logOutService.logOut();
     }
 
 }

@@ -1,12 +1,4 @@
-
-
-
-
-
-
-
-
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -14,39 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
     <!-- Google Font Linking -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
-    <title>Split Check</title>
+
+    <title>Bill the Split</title>
     <style>
         html * {
-            font-family: 'Source Sans Pro', sans-serif;
-        }
-
-        /* input fields */
-        input[type=text], input[type=password] {
-            width: 100%;
-            padding: 10px 20px;
-            margin: 8px 0;
-            display: inline-block;
-            border: 1px solid #ccc;
-            box-sizing: border-box;
+            font-family: 'Source Sans Pro', sans-serif !important;
         }
 
         .bg-1 {
-            background-color: #45b39d;
+            background-color: #4a5d34;
             color: #ffffff;
         }
 
         .bg-2 {
-            background-color: #a2d9ce;
+            background-color: #bee494;
             color: #ffffff;
         }
 
         .bg-3 {
-            background-color: #45b39d;
+            background-color: #4a5d34;
             color: #ffffff;
         }
 
@@ -59,10 +41,9 @@
             padding-top: 36px;
             padding-bottom: 36px;
         }
-
-        /* buttons */
+        /* Button */
         button {
-            background-color: #154360;
+            background-color: #39442b;
             color: white;
             padding: 10px 24px;
             margin: 8px 0;
@@ -74,177 +55,36 @@
             button:hover {
                 opacity: 80%;
             }
-
-        .cancelbtn {
-            width: auto;
-            margin: 0 auto;
-            padding: 10px 19px;
-            background-color: #c0392b;
-        }
-
-        /* modal image and close button position */
-        .imgcontainer {
-            text-align: center;
-            margin: 24px 0 12px 0;
-            position: relative;
-        }
-
-        img.avatar {
-            width: 40%;
-            border-radius: 50%;
-        }
-
-        img {
-            padding: 10px 10px;
-        }
-
-        .container {
-            padding: 15px;
-        }
-
-        span.psw {
-            float: right;
-            padding-top: 15px;
-        }
-
-        /* modal background */
-        .modal {
-            display: none; /* hidden by default*/
-            position: fixed; /* stay in place */
-            z-index: 1; /* sit on top */
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto; /* enable scroll if needed */
-            background-color: rgb(0,0,0);
-            background-color: rgb(0,0,0,0.4);
-            padding-top: 50px;
-        }
-        /* modal content box */
-        .model-content {
-            background-color: #fefefe;
-            margin: 5% auto 15% auto; /* 5% from top, 15% from bottom, centered*/
-            border: 1px solid #888;
-            width: 80%;
-        }
-        /* modal button x */
-        .close {
-            position: absolute;
-            right: 25px;
-            top: 0px;
-            color: #000;
-            font-size: 35px;
-            font-weight: bond;
-        }
-
-            .close:hover,
-            .close:focus {
-                color: #c0392b;
-                cursor: pointer;
-            }
-
-        /* zoom animation*/
-        .animate {
-            -webkit-animation: animatezoom 0.6s;
-            animation: animatezoom 0.6s;
-        }
-
-        @-webkit-keyframes animatezoom {
-            from {
-                -webkit-transform: scale(0)
-            }
-
-            to {
-                -webkit-transform: scale(1)
-            }
-        }
-
-        @keyframes animatezoom {
-            from {
-                transform: scale(0)
-            }
-
-            to {
-                transform: scale(1)
-            }
-        }
-
-        /* change styles for span and cancel buttons on smaller screens */
-        @media screen and (max-width: 300px) {
-            span.psw {
-                display: block;
-                float: none;
-            }
-
-            .cancelbtn {
-                width: 100%;
-            }
-        }
     </style>
 </head>
-
 <body>
     <div class="container-fluid bg-1 text-center">
-        <h1>Welcome to Split Check!</h1>
-        <img src="./assets/img/logoblue.png" class="rounded-circle" alt="Logo" width="350" height="350">
-        <h4>A web app that makes going out to eat with your friends easier.</h4>
-        <p>Split check provides an easy solution to synchronously splitting and paying for checks from group outings through Venmo. It utilizes Yelp to suggest restaurants for groups to go to based on an average spending budget calculated using each users Venmo transaction history or by a user-inputed value. The user-host is given full control of making such decisions to ensure everyone can enjoy a fun, friendly outing!</p>
-        <button class="loginBtn loginBtn--google" (click)="signinWithGoogle()">
-            Login with Google
-        </button>
-        <div id="multi_lines_text">{{ data }}</div>
+        <h1>Welcome to Bill the Split</h1>
+        <br>
+        <img src="./assets/img/logo.png" class="rounded-circle" alt="logo" width="350" height="350">
+        <br><br>
+        <h4>A web app that allows a user to easily split a bill and bill the split</h4>
+        <p>
+            BTS provides an easy solution to splitting costs from a group outing starting
+            with the car ride to the restaurant to the check at the restaurant. It utilizes the Yelp API
+            by taking user input filters and providing local restaurant recommendations, and ranks them
+            based on estimated travel time and cost pulled from the Lyft API. A user can then push Venmo pay requests
+            to members of the group for the car ride, and after their meal, do the same for the check.
+        </p>
+        <br>
+        <!-- ADD OAUTH HERE -->
+        <button type="login" (click)="signinWithGoogle()" class="button btn-block">Log in with Google</button>
+        <div class="multi_lines_text">{{ data }}</div>
     </div>
-    
-    <div id="id01" class="modal">
-        <form class="model-content animate" action="/action_page.php" method="POST">
-            <div class="imgcontainer">
-                <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close">&times;</span>
-                <img src="./assets/img/logoblue.png" alt="Logo" class="avatar">
-            </div>
-
-            <div class="container bg-3">
-                <label for="username"><b>Username</b></label>
-                <input type="text" placeholder="Enter Username" name="username" required>
-                <label for="password"><b>Password</b></label>
-                <input type="password" placeholder="Enter Password" name="password" required>
-
-                <!-- NEED TO VERIFY TO LOG IN -->
-                <button type="submit">Login</button>
-
-                <label>
-                    <input type="checkbox" checked="checked" name="rememberme"> Remember me
-                </label>
-            </div>
-
-            <div class="container bg-3" style="background-color:#ffffff;">
-                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                <span class="psw"><a href="https://venmo.com/signup" target="-blank">Forgot password?</a></span>
-            </div>
-        </form>
-    </div>
-
-    <script>
-        // get modal
-        var modal = document.getElementById('id01');
-
-        //close modal if user clicks outside of it
-        window.onclick = function (event) {
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-    </script>
-
-
     <div class="container-fluid-footer bg-2 text-center">
         <p>CS411 Group 1: Wyatt Howe, Noah Cohen, Michelle Lee, Andre Pires</p>
     </div>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
+

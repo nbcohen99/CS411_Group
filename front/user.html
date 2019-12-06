@@ -1,0 +1,465 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    
+    <title>USER</title>
+  </head>
+  <style>
+      html * {
+        font-family: 'Source Sans Pro', sans-serif !important;
+      }
+      .bg-1 {  
+        background-color: #4a5d34;
+        color: #ffffff;
+      }
+      .bg-2 {
+        background-color: #bee494;
+        color: #ffffff;
+      }
+      .bg-3 {
+        background-color: #afd189;
+        color: #ffffff;
+      }
+      .bg-4 {
+        background-color: #9fbf7b;
+        color: #ffffff;
+      }
+
+
+      .container-fluid {
+        padding-top: 24px;
+        padding-bottom: 30px;
+      }
+      .container-fluid-footer {
+        padding-top: 36px;
+        padding-bottom: 36px;
+      }
+      .container-fluid-small {
+        padding-top: 12px;
+        padding-bottom: 12px;
+      }
+      .container-fluid-pick {
+        padding-top: 24px;
+        padding-bottom: 1px;
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      .container-fluid-pick-link {
+        padding-top: 1px;
+        padding-bottom: 12px;
+        padding-left: 12px;
+        padding-right: 12px;
+      }
+      .container-fluid-filter {
+        padding-top: 24px;
+        padding-bottom: 1px;
+      }
+      .container-fluid-search {
+        padding-bottom: 24px;
+      }
+
+      .navbar {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+            font-size: 12px;
+            letter-spacing: 5px;
+            background-color: #4a5d34 !important;
+      }
+      /* Navbar items to the right */
+      .ml-auto .dropdown-menu {
+        left: auto !important;
+        right: 0px;
+      }
+      .navbar-nav li a:hover {
+        color: #bee494 !important;
+      }
+
+      /* Navtab colors */
+      .nav li a {
+        color:#4a5d34 !important;
+      }
+      .nav-tabs li.active a, .nav-tabs li.active a:focus, .nav-tabs li.active a:hover {
+          background-color: #bee494 !important;
+          border-bottom-color: transparent !important;
+          border-color: #4a5d34;
+      }
+      .nav-tabs {
+          border-bottom-color: #4a5d34 !important;
+      }
+      .modal-body {
+        color: black;
+      }
+
+
+    </style>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+        <a class="navbar-brand" href="user.html">
+            <img src="assets/img/logo.png" class="rounded-circle" alt="logo" style="width: 40px;">
+        </a>       
+        <h2>USER's Splits</h2>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="index.html">LOGOUT</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container-fluid-small"></div>
+    <!-- FILTER -->
+    <div class="container-fluid-filter bg-2 text-center">
+      <!-- DISTANCE -->
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary active">
+          <input type="radio" name="options" id="Bird's-eye View" autocomplete="off" checked> Bird's-eye View
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="options" id="Driving" autocomplete="off"> Driving (5 mi.)
+        </label>
+        <label class="btn btn-secondary">
+          <input type="radio" name="options" id="Biking" autocomplete="off"> Biking (2  mi.)
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="Walking" autocomplete="off"> Walking (1 mi.)
+        </label>
+        <label class="btn btn-secondary">
+            <input type="radio" name="options" id="Within 4 blocks" autocomplete="off"> Within 4 blocks
+          </label>
+      </div>
+      <!-- PRICE -->
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <label class="btn btn-secondary active">
+          <input type="checkbox" autocomplete="off"> $
+        </label>
+        <label class="btn btn-secondary active">
+          <input type="checkbox" autocomplete="off"> $$
+        </label>
+        <label class="btn btn-secondary active">
+          <input type="checkbox" autocomplete="off"> $$$
+        </label>
+        <label class="btn btn-secondary active">
+          <input type="checkbox" autocomplete="off"> $$$$
+        </label>
+      </div>
+      <!-- CATEGORIES -->
+      <!-- Button trigger modal -->
+      <button type="button" style="background-color: #6E757D; border:#6E757D;"class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
+          Categories
+      </button>
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-scrollable" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+                <label type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </label>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col text-left">
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Coffee & Tea"> Coffee & Tea</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Sandwiches"> Sandwiches</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Italian"> Italian</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Seafood"> Seafood</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Pizza"> Pizza</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Salad"> Salad</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Chinese"> Chinese</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Cafe"> Cafe</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Mexican"> Mexican</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Food Trucks"> Food Trucks</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Japanese"> Japanese</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Desserts"> Desserts</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Delis"> Delis</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Burgers"> Burgers</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Fast Food"> Fast Food</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Ice Cream & Frozen Yogurt"> Ice Cream & Frozen Yogurt</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Mediterranean"> Mediterranean</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Asian Fusion"> Asian Fusion</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Latin American"> Latin American</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Steakhouses"> Steakhouses</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="French"> French</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Middle Eastern"> Middle Eastern</label>
+                    </div>
+
+                  </div>
+                  <div class="col text-left">
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Food Stands"> Food Stands</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Thai"> Thai</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Bubble Tea"> Bubble Tea</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Indian"> Indian</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Vegan"> Vegan</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Soup"> Soup</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Vegetarian"> Vegetarian</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Greek"> Greek</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Vietnamese"> Vietnamese</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Barbeque"> Barbeque</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Bagels"> Bagels</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Columbian"> Columbian</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Diners"> Diners</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Food Delivery Services"> Food Delivery Services</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Chicken Wings"> Chickens Wings</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Irish"> Irish</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Halal"> Halal</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Ramen"> Ramen</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Street Vendors"> Street Vendors</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Gluten-Free"> Gluten-Free</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Korean"> Korean</label>
+                    </div>
+                    <div class="checkbox">
+                      <label><input type="checkbox" value="Southern"> Southern</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" style="background-color: #2e50e6;" class="btn btn-secondary" data-dismiss="modal">Save</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br><br>
+        <div class="row">
+          <div class="col text-left" style="padding-left: 118px;">
+            <div class="input-group" style="width:138px;">
+              <div class="input-group-prepend">
+                <span class="input-group-text"># People</span>
+              </div> 
+              <input type="text" class="form-control" placeholder="1-6" >
+            </div>
+          </div>
+          <div class="col text-right" style="padding-right: 118px;">
+              <button type="button" style="background-color:#f14e4e; border:#f14e4e;" class="btn btn-primary">Search</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid-small bg-2"></div>
+    <!-- CHOOSE -->
+    <div class="container-fluid-pick bg-3">
+      <form>
+        <div class="form-group">
+          <label for="select">Choose from the following:</label>
+          <select multiple class="form-control" id="select">
+            <!-- INSERT RESTAURANT NAMES -->
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+          </select>
+        </div>
+      </form>
+    </div>
+    <!-- LINKS -->
+    <div class="container-fluid-pick-link bg-3 text-right">
+      <div class="row">
+        <div class="col-8">
+            <form>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Type of Ride</span>
+                    </div>
+                    <label type="text" class="form-control" aria-label="" disabled></label>
+                    <div class="input-group-append">
+                        <span class="input-group-text">Min Ride</span>
+                    </div>
+                    <label type="text" class="form-control" aria-label="" disabled></label>
+                    <div class="input-group-append">
+                        <span class="input-group-text">Max Ride </span>
+                    </div>
+                    <label type="text" class="form-control" aria-label="" disabled></label>
+                    <div class="input-group-append">
+                        <span class="input-group-text">Est. Time</span>
+                    </div>
+                    <label type="text" class="form-control" aria-label="" disabled></label>
+                </div>
+            </form>
+        </div>
+        <div class="col-4">
+          <!-- YELP LINK GOES HERE -->
+          <a href="https:www.yelp.com" target="_blank">
+            <img alt="yelplogo" class="rounded-circle text-right" src="assets/img/yelplogo.png" width="50" height="50">
+          </a>
+          <!-- LYFT LINK GOES HERE -->
+          <a href="https:www.lyft.com" target="_blank">
+            <img alt="lyftlogo" style="object-fit: cover;" class="rounded-circle" src="assets/img/lyftlogo.png" width="50" height="50">
+          </a>  
+        </div>
+      </div>
+
+    </div>
+    <!-- ENTER VENMO USERNAME & AMOUNT FOR RESTAURANT BILL -->
+    <div class="container-fluid bg-4">
+      <div class="row">
+        <div class="col">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">@</span>
+                </div>
+              <input type="text" class="form-control" placeholder="Venmo Username">
+            </div>
+        </div>
+        <div class="col text-right">
+            <button type="button" style="background-color: #6E757D; border:#6E757D;"class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable2">
+                Members
+            </button>
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalScrollable2" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle2" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
+                    <label type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </label>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col text-left">
+                        <div class="checkbox">
+                          <label><input type="checkbox" value="1"> @email.com</label>
+                        </div>
+                        <div class="checkbox">
+                          <label><input type="checkbox" value="2"> @email.com</label>
+                        </div>
+                        <div class="checkbox">
+                          <label><input type="checkbox" value="3"> @email.com</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" style="background-color: #2e50e6;" class="btn btn-secondary" data-dismiss="modal">Save</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+        
+      <br>
+      <label for="select">Total amount + Tip:</label>
+      <form>
+        <div class="input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text">$</span>
+            </div>
+          <input type="text" class="form-control" placeholder="0.00">
+          <div class="input-group-append">
+              <!-- ADD JQUERY TO THIS? -->
+              <button class="btn btn-default" style="background-color: #6E757D; color:#ffffff"type="submit">Send</button>
+            </div>
+        </div>
+      </form>
+    </div>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
