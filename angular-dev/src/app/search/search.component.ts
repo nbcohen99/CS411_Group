@@ -310,6 +310,24 @@ export class SearchComponent implements OnInit {
         this.destinationLat = location.lat;
         this.destinationLong = location.lng;
 
+<<<<<<< HEAD
+=======
+    getCurrentLocation(currentAddress: string, destinationAddress: string) {
+        console.log(currentAddress);
+        console.log(destinationAddress);
+        var location = { display_address: null, lat: null, lng: null, place_id: null, routable_address: null }
+        console.log("Sending req");
+        this.lyftSearch.getLatLong(currentAddress).subscribe(
+            (data: any) => {
+                console.log("Got subscribe");
+                console.log(data);
+                location = data;
+                this.currentLat = location.lat;
+                this.currentLong = location.lng;
+                this.currentAddress = location.routable_address;
+
+                this.addressLyft(destinationAddress);
+>>>>>>> 0f9a5aa75a598ea435474077409833f149eaeafa
 
 
         this.estimateLyft(
@@ -325,6 +343,7 @@ export class SearchComponent implements OnInit {
 
   }
 
+<<<<<<< HEAD
   // Creates a Lyft deeplink for the selected destination and current location
   getLyftLink(rideType: string) {
     var lyftDeep = "lyft://ridetype";
@@ -334,6 +353,65 @@ export class SearchComponent implements OnInit {
       "&pickup[longitude]=" + this.currentLong +
       "&destination[latitude]=" + this.destinationLat +
       "&destination[longitude]=" + this.destinationLong;
+=======
+    // Gets price and time estimates for several Lyft options
+    estimateLyft(start_lat: string, start_long, end_lat, end_long) {
+
+        //var sample_coords = ["42.3496428", "-71.0943789", "42.349341", "-71.1039816"];
+
+        // takes substring to 'round' numbers
+        console.log("making third req");
+        this.lyftSearch.getPriceEstimate(
+            start_lat.substring(0, 9),
+            start_long.substring(0, 9),
+            end_lat.substring(0, 9),
+            end_long.substring(0, 9)).subscribe(
+                (data: any) => {
+                    console.log("got it");
+                    console.log(data);
+                    // TODO: build interface for returned data
+                    var trip = {
+                        display_name: null,
+                        estimated_cost_cents_max: null,
+                        estimated_cost_cents_min: null,
+                        estimated_duration_seconds: null
+                    };
+
+                    var rides = { cost_estimates: [] }
+
+                    // get all possible ride estimates
+                    rides = data;
+                    for (var i = 0; i < rides.cost_estimates.length; i++) {
+                        this.lyftEstimates.push(rides.cost_estimates[i]);
+                    }
+                    this.lyftEstimatesData = [""];
+                    for (var i = 0; i < this.lyftEstimates.length; i++) {
+                        var parsedData = this.parseEstimate(
+                            this.lyftEstimates[i].estimated_duration_seconds,
+                            this.lyftEstimates[i].estimated_cost_cents_min,
+                            this.lyftEstimates[i].estimated_cost_cents_max);
+                        var minutes = parsedData[0];
+                        var seconds = parsedData[1]
+                        var minCost = parsedData[2];
+                        var maxCost = parsedData[3];
+                        this.lyftEstimatesData.push("name = " + this.lyftEstimates[i].display_name +
+                            " ---------- estimated price: $" + minCost +
+                            " to $" + maxCost +
+                            " ---------- estimated time is about " + minutes +
+                            " minutes and " + seconds + " seconds");
+                        if (i == 1) {
+                            console.log("HERE");
+                            this.lyftType = this.lyftEstimates[i].display_name;
+                            this.lyftMin = "$"+minCost;
+                            this.lyftMax = "$"+maxCost;
+                            this.lyftTime = Math.floor(minutes) + "m " + seconds + "s";
+                        }
+                    }
+
+                    this.estimatesReady = true;
+                }
+            )
+>>>>>>> 0f9a5aa75a598ea435474077409833f149eaeafa
 
   }
 
@@ -349,8 +427,51 @@ export class SearchComponent implements OnInit {
     if (index == 0) {
       this.radiusFilter = 32186;
     }
+<<<<<<< HEAD
     else if (index == 1) {
       this.radiusFilter = 8046;
+=======
+
+
+    // Find the coords of the user's entered location or get the current location through browser
+    addressLyft(address: string) {
+
+        if (!this.enteredCurrentLocation) {
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    this.currentLat = position.coords.latitude;
+                    this.currentLong = position.coords.longitude;
+                }
+            )
+        }
+
+        // Uses Lyft API to get full address, Long, Lat of given address
+        console.log("sending second req");
+        var location = { display_address: null, lat: null, lng: null, place_id: null, routable_address: null }
+        this.lyftSearch.getLatLong(address).subscribe(
+            (data: any) => {
+                console.log("got it");
+                console.log(data);
+
+
+                location = data;
+                this.destinationLat = location.lat;
+                this.destinationLong = location.lng;
+
+
+
+                this.estimateLyft(
+                    this.currentLat.toString(),
+                    this.currentLong.toString(),
+                    this.destinationLat.toString(),
+                    this.destinationLong.toString()
+                )
+
+            }
+        );
+
+
+>>>>>>> 0f9a5aa75a598ea435474077409833f149eaeafa
     }
     else if (index == 2) {
       this.radiusFilter = 3218;
