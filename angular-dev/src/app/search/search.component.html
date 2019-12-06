@@ -376,7 +376,7 @@
         </div>
         <br><br>
         <div class="row">
-            <div class="col text-left" style="padding-left: 118px;">
+            <div class="col-4 text-left" style="padding-left: 118px;">
                 <div class="input-group" style="width:138px;">
                     <div class="input-group-prepend">
                         <span class="input-group-text"># People</span>
@@ -384,13 +384,26 @@
                     <input type="text" class="form-control" placeholder="1-6">
                 </div>
             </div>
-            <div class="col text-right" style="padding-right: 118px;">
-                <input #searchLyftInput placeholder="Enter your current location" style="width:220px;">
-                <input #searchInput class="textField" placeholder="Search Term" 
-                       (keyup.enter)="searchYelp(searchInput.value, searchInput.value, true)">
-                <button type="button" style="background-color:#f14e4e; border:#f14e4e;" class="btn btn-primary" (click)="searchYelp(searchInput.value, searchLyftInput.value, true)">Search</button>
-                <br><br>
-                <button type="button" style="background-color:#f14e4e; border:#f14e4e;" class="btn btn-primary" (click)="searchYelp(searchInput.value, searchLyftInput.value, false)">Use Current Location</button>
+
+            <div class="col-4 text-center">
+                <form>
+                    <div class="input-group">
+                        <input #searchLyftInput class="textField" placeholder="Enter your current location">
+                        <div class="input-group-append">
+                            <button type="button" style="background-color:#2d54d4; border:#2d54d4;" class="btn btn-primary" (click)="searchYelp(searchInput.value, searchLyftInput.value, false)">Use Current Location</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-4 text-right" style="padding-right: 118px;">
+                <form>
+                    <div class="input-group">
+                        <input #searchInput class="textField" placeholder="Search Term" (keyup.enter)="searchYelp(searchInput.value, searchInput.value, true)">
+                        <div class="input-group-append">
+                            <button type="button" style="background-color:#f14e4e; border:#f14e4e;" class="btn btn-primary" (click)="searchYelp(searchInput.value, searchLyftInput.value, true)">Search</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
