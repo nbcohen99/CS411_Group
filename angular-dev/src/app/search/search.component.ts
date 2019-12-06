@@ -17,74 +17,80 @@ import { GroupService } from '../services/group.service';
 })
 export class SearchComponent implements OnInit {
 
-  user: User; // this logged in user
+    user: User; // this logged in user
 
-  yelpNames: any[]; // store restaurant results
-  yelpAddresses: any[]; // store restaurant addresses, same index as yelpNames
+    yelpNames: any[]; // store restaurant results
+    yelpAddresses: any[]; // store restaurant addresses, same index as yelpNames
 
-  lyftEstimates: LyftEstimate[]; // store lyft posibilites as objects
-  lyftEstimatesData: string[]; // display lyft options in a parsed string
-  estimatesReady: boolean; // is the estimate data ready to be displayed
+    lyftEstimates: LyftEstimate[]; // store lyft posibilites as objects
+    lyftEstimatesData: string[]; // display lyft options in a parsed string
+    estimatesReady: boolean; // is the estimate data ready to be displayed
 
-  enteredCurrentLocation: boolean = false; // is user not using current location
-  enteredAddress: string;
-  currentAddress: string;
-  currentLat: number;
-  currentLong: number;
-  destinationLat: number;
-  destinationLong: number;
-  currentLocation: any; // address of current location, used to autofill box after location is found
+    lyftType: string;
+    lyftMin: string;
+    lyftMax: string;
+    lyftTime: string;
+    testForIndex: number;
 
-  categories: string[]; // Filters for yelp searching
-  priceFilter: string[];
-  radiusFilter: number;
+    enteredCurrentLocation: boolean = false; // is user not using current location
+    enteredAddress: string;
+    currentAddress: string;
+    currentLat: number;
+    currentLong: number;
+    destinationLat: number;
+    destinationLong: number;
+    currentLocation: any; // address of current location, used to autofill box after location is found
 
-  activeDistanceButton: boolean[]; // array to determine which distance button is active
-  activePriceButton: boolean[] // array to determine which price button is active
+    categories: string[]; // Filters for yelp searching
+    priceFilter: string[];
+    radiusFilter: number;
 
-
-  lyftDeepLink: string;
-  venmoDeepLink: string;
-
-  groupList: Group[] = [];
-  memberList: User[] = [];
-
-  constructor(
-    private yelpSearch: YelpSearchService,
-    private lyftSearch: LyftSearchService,
-    private cookieService: CookieService,
-    private userService: UserService,
-    private groupService: GroupService,
-    private redirect: Router
-) { }
+    activeDistanceButton: boolean[]; // array to determine which distance button is active
+    activePriceButton: boolean[] // array to determine which price button is active
 
 
-  ngOnInit() {
+    lyftDeepLink: string;
+    venmoDeepLink: string;
 
-    // initialize all variables
-    this.categories = [""];
-    this.estimatesReady = false;
-    this.activeDistanceButton = [false, false, false, false, false];
-    this.activePriceButton = [false, false, false, false];
+    groupList: Group[] = [];
+    memberList: User[] = [];
 
-
-    var uid = this.cookieService.get("user-id");
-    this.userService.getUserByID(uid).subscribe(users => {
-        if (users.length != 1) {
-            console.log("UserID not found");
-            this.redirect.navigate(['/']);
-        }
-        else {
-            this.user = users[0];
-            this.getAllGroups();
-
-        }
-    });
+    constructor(
+        private yelpSearch: YelpSearchService,
+        private lyftSearch: LyftSearchService,
+        private cookieService: CookieService,
+        private userService: UserService,
+        private groupService: GroupService,
+        private redirect: Router
+    ) { }
 
 
-  }
+    ngOnInit() {
 
-  removeMember(index: number) {
+        // initialize all variables
+        this.categories = [""];
+        this.estimatesReady = false;
+        this.activeDistanceButton = [false, false, false, false, false];
+        this.activePriceButton = [false, false, false, false];
+
+
+        var uid = this.cookieService.get("user-id");
+        this.userService.getUserByID(uid).subscribe(users => {
+            if (users.length != 1) {
+                console.log("UserID not found");
+                this.redirect.navigate(['/']);
+            }
+            else {
+                this.user = users[0];
+                this.getAllGroups();
+
+            }
+        });
+
+
+    }
+
+    removeMember(index: number) {
         this.memberList.splice(index, 1);
     }
     getAllGroups() {
@@ -111,156 +117,164 @@ export class SearchComponent implements OnInit {
         }
     }
 
-  // starter function call that takes in all filters and parameters needed
-  startProcess(
-    currentLocation: string,
-    currentLocationEntered: boolean
-  ) {
+    // starter function call that takes in all filters and parameters needed
+    startProcess(
+        currentLocation: string,
+        currentLocationEntered: boolean
+    ) {
 
-    // resets all displayed data with each search
-
-
-
-    this.searchYelp(this.categories.toString(), currentLocation, currentLocationEntered);
-  }
+        // resets all displayed data with each search
 
 
-  // calls backend to get Yelp list of restaurants based on filters
-  searchYelp(categories: string, currentLocation: string, currentLocationEntered: boolean) {
-    this.yelpNames = [];
-    this.yelpAddresses = [];
-    this.lyftEstimates = [];
-    this.lyftEstimatesData = [""];
-    this.currentLat = null;
-    this.currentLong = null;
-    this.destinationLat = null;
-    this.destinationLong = null;
 
-    if (currentLocationEntered) {
-      this.enteredAddress = currentLocation;
-      this.enteredCurrentLocation = true;
-    }
-    else {
-      this.enteredCurrentLocation = false;
+        this.searchYelp(this.categories.toString(), currentLocation, currentLocationEntered);
     }
 
 
-    // if user did not select any prices
-    if (this.priceFilter == null) {
-      this.priceFilter = ["1", "2", "3", "4"];
-    }
-    // default radius to 2 miles
-    if (this.radiusFilter == null) {
-      this.radiusFilter = 3218;
-    }
-    this.yelpSearch.getData(categories, this.priceFilter.toString(), this.radiusFilter).subscribe(
-      
-      (data: any) => {
-        for (var i = 0; i < 20; i++) {
-          // TODO: build interface for returned data
-          var business = { name: null, location: { display_address: null } };
+    // calls backend to get Yelp list of restaurants based on filters
+    searchYelp(categories: string, currentLocation: string, currentLocationEntered: boolean) {
+        this.yelpNames = [];
+        this.yelpAddresses = [];
+        this.lyftEstimates = [];
+        this.lyftEstimatesData = [""];
+        this.currentLat = null;
+        this.currentLong = null;
+        this.destinationLat = null;
+        this.destinationLong = null;
 
-
-          business = data.businesses[i];
-
-          // send returned data to displayed data
-          this.yelpNames.push(business.name);
-          this.yelpAddresses.push(business.location.display_address[0] + business.location.display_address[1]);
-          // }
+        if (currentLocationEntered) {
+            this.enteredAddress = currentLocation;
+            this.enteredCurrentLocation = true;
+        }
+        else {
+            this.enteredCurrentLocation = false;
         }
 
-        console.log("pushed to list");
-      }
-    )
-  }
 
-
-  getLyftResults(destinationAddress: string) {
-
-    // parses price and time estimates given general name of place
-    this.lyftEstimates = [];
-    this.lyftEstimatesData = [""];
-    if (this.enteredCurrentLocation) {
-      // need to get coords for entered location
-      this.getCurrentLocation(this.enteredAddress, destinationAddress);
-    }
-    else {
-      this.addressLyft(destinationAddress);
-    }
-  }
-    
-
-
-
-  getCurrentLocation(currentAddress: string, destinationAddress: string) {
-    console.log(currentAddress);
-    console.log(destinationAddress);
-    var location = { display_address: null, lat: null, lng: null, place_id: null, routable_address: null }
-
-    this.lyftSearch.getLatLong(currentAddress).subscribe(
-      (data: any) => {
-          location = data;
-          this.currentLat = location.lat;
-          this.currentLong = location.lng;
-          this.currentAddress = location.routable_address;
-
-          this.addressLyft(destinationAddress);
-
-
-      }
-
-  )
-}
-
-
-    
-
-  // Gets price and time estimates for several Lyft options
-  estimateLyft(start_lat: string, start_long, end_lat, end_long) {
-
-    //var sample_coords = ["42.3496428", "-71.0943789", "42.349341", "-71.1039816"];
-
-    // takes substring to 'round' numbers
-    this.lyftSearch.getPriceEstimate(
-      start_lat.substring(0, 9),
-      start_long.substring(0, 9),
-      end_lat.substring(0, 9),
-      end_long.substring(0, 9)).subscribe(
-        (data: any) => {
-          // TODO: build interface for returned data
-          var trip = {
-            display_name: null,
-            estimated_cost_cents_max: null,
-            estimated_cost_cents_min: null,
-            estimated_duration_seconds: null
-          };
-
-          var rides = { cost_estimates: [] }
-
-          // get all possible ride estimates
-          rides = data;
-          for (var i = 0; i < rides.cost_estimates.length; i++) {
-            this.lyftEstimates.push(rides.cost_estimates[i]);
-          }
-          this.lyftEstimatesData = [""];
-          for (var i = 0; i < this.lyftEstimates.length; i++) {
-            var parsedData = this.parseEstimate(
-              this.lyftEstimates[i].estimated_duration_seconds,
-              this.lyftEstimates[i].estimated_cost_cents_min,
-              this.lyftEstimates[i].estimated_cost_cents_max);
-            var minutes = parsedData[0];
-            var seconds = parsedData[1]
-            var minCost = parsedData[2];
-            var maxCost = parsedData[3];
-            this.lyftEstimatesData.push("name = " + this.lyftEstimates[i].display_name +
-              " ---------- estimated price: $" + minCost +
-              " to $" + maxCost +
-              " ---------- estimated time is about " + minutes +
-              " minutes and " + seconds + " seconds");
-          }
-          this.estimatesReady = true;
+        // if user did not select any prices
+        if (this.priceFilter == null) {
+            this.priceFilter = ["1", "2", "3", "4"];
         }
-      )
+        // default radius to 2 miles
+        if (this.radiusFilter == null) {
+            this.radiusFilter = 3218;
+        }
+        this.yelpSearch.getData(categories, this.priceFilter.toString(), this.radiusFilter).subscribe(
+
+            (data: any) => {
+                for (var i = 0; i < 20; i++) {
+                    // TODO: build interface for returned data
+                    var business = { name: null, location: { display_address: null } };
+
+
+                    business = data.businesses[i];
+
+                    // send returned data to displayed data
+                    this.yelpNames.push(business.name);
+                    this.yelpAddresses.push(business.location.display_address[0] + business.location.display_address[1]);
+                    // }
+                }
+
+                console.log("pushed to list");
+            }
+        )
+    }
+
+
+    getLyftResults(destinationAddress: string, index: number) {
+        this.testForIndex = index;
+        
+        // parses price and time estimates given general name of place
+        this.lyftEstimates = [];
+        this.lyftEstimatesData = [""];
+        if (this.enteredCurrentLocation) {
+            // need to get coords for entered location
+            this.getCurrentLocation(this.enteredAddress, destinationAddress);
+        }
+        else {
+            this.addressLyft(destinationAddress);
+        }
+    }
+
+
+
+
+    getCurrentLocation(currentAddress: string, destinationAddress: string) {
+        console.log(currentAddress);
+        console.log(destinationAddress);
+        var location = { display_address: null, lat: null, lng: null, place_id: null, routable_address: null }
+
+        this.lyftSearch.getLatLong(currentAddress).subscribe(
+            (data: any) => {
+                location = data;
+                this.currentLat = location.lat;
+                this.currentLong = location.lng;
+                this.currentAddress = location.routable_address;
+
+                this.addressLyft(destinationAddress);
+
+
+            }
+
+        )
+    }
+
+
+
+
+    // Gets price and time estimates for several Lyft options
+    estimateLyft(start_lat: string, start_long, end_lat, end_long) {
+
+        //var sample_coords = ["42.3496428", "-71.0943789", "42.349341", "-71.1039816"];
+
+        // takes substring to 'round' numbers
+        this.lyftSearch.getPriceEstimate(
+            start_lat.substring(0, 9),
+            start_long.substring(0, 9),
+            end_lat.substring(0, 9),
+            end_long.substring(0, 9)).subscribe(
+                (data: any) => {
+                    // TODO: build interface for returned data
+                    var trip = {
+                        display_name: null,
+                        estimated_cost_cents_max: null,
+                        estimated_cost_cents_min: null,
+                        estimated_duration_seconds: null
+                    };
+
+                    var rides = { cost_estimates: [] }
+
+                    // get all possible ride estimates
+                    rides = data;
+                    for (var i = 0; i < rides.cost_estimates.length; i++) {
+                        this.lyftEstimates.push(rides.cost_estimates[i]);
+                    }
+                    this.lyftEstimatesData = [""];
+                    for (var i = 0; i < this.lyftEstimates.length; i++) {
+                        var parsedData = this.parseEstimate(
+                            this.lyftEstimates[i].estimated_duration_seconds,
+                            this.lyftEstimates[i].estimated_cost_cents_min,
+                            this.lyftEstimates[i].estimated_cost_cents_max);
+                        var minutes = parsedData[0];
+                        var seconds = parsedData[1]
+                        var minCost = parsedData[2];
+                        var maxCost = parsedData[3];
+                        this.lyftEstimatesData.push("name = " + this.lyftEstimates[i].display_name +
+                            " ---------- estimated price: $" + minCost +
+                            " to $" + maxCost +
+                            " ---------- estimated time is about " + minutes +
+                            " minutes and " + seconds + " seconds");
+                        if (i == this.testForIndex) {
+                            this.lyftType = this.lyftEstimates[i].display_name;
+                            this.lyftMin = "$"+minCost;
+                            this.lyftMax = "$"+maxCost;
+                            this.lyftTime = Math.floor(minutes) + "m " + seconds + "s";
+                        }
+                    }
+
+                    this.estimatesReady = true;
+                }
+            )
 
     }
 
@@ -330,58 +344,58 @@ export class SearchComponent implements OnInit {
         return venmoDeep + username + "&amount=" + amountPerPerson + "&note=Bill paid using Splitcheck";
     }
 
-  // updates the distance filter and the button is active
-  updateActiveDistance(index: number) {
-    if (index == 0) {
-      this.radiusFilter = 32186;
-    }
-    else if (index == 1) {
-      this.radiusFilter = 8046;
-    }
-    else if (index == 2) {
-      this.radiusFilter = 3218;
-    }
-    else if (index == 3) {
-      this.radiusFilter = 1609;
-    }
-    else if (index == 4) {
-      this.radiusFilter = 300;
-    }
-
-
-    if (this.activeDistanceButton[index]) {
-      this.activeDistanceButton[index] = false;
-    }
-    else {
-      for (var i = 0; i < 5; i++) {
-        if (i === index) {
-          this.activeDistanceButton[i] = true;
+    // updates the distance filter and the button is active
+    updateActiveDistance(index: number) {
+        if (index == 0) {
+            this.radiusFilter = 32186;
         }
-      }
-    }
-  }
-
-
-  // updates the price filter and the button that is active
-  updateActivePrice(index: number) {
-
-    if (this.activePriceButton[index]) {
-      var index2 = this.priceFilter.indexOf(index.toString(), 0);
-      this.priceFilter = this.priceFilter.slice(0, index2).concat(this.priceFilter.slice(index2 + 1));
-
-      // replace element in active buttons
-      this.activePriceButton.splice(index, 1, false);
-    }
-    else {
-      this.priceFilter.push(index.toString());
-      for (var i = 0; i < 4; i++) {
-        if (i === index) {
-          this.activePriceButton[i] = true;
+        else if (index == 1) {
+            this.radiusFilter = 8046;
         }
-      }
+        else if (index == 2) {
+            this.radiusFilter = 3218;
+        }
+        else if (index == 3) {
+            this.radiusFilter = 1609;
+        }
+        else if (index == 4) {
+            this.radiusFilter = 300;
+        }
+
+
+        if (this.activeDistanceButton[index]) {
+            this.activeDistanceButton[index] = false;
+        }
+        else {
+            for (var i = 0; i < 5; i++) {
+                if (i === index) {
+                    this.activeDistanceButton[i] = true;
+                }
+            }
+        }
     }
 
-  }
+
+    // updates the price filter and the button that is active
+    updateActivePrice(index: number) {
+
+        if (this.activePriceButton[index]) {
+            var index2 = this.priceFilter.indexOf(index.toString(), 0);
+            this.priceFilter = this.priceFilter.slice(0, index2).concat(this.priceFilter.slice(index2 + 1));
+
+            // replace element in active buttons
+            this.activePriceButton.splice(index, 1, false);
+        }
+        else {
+            this.priceFilter.push(index.toString());
+            for (var i = 0; i < 4; i++) {
+                if (i === index) {
+                    this.activePriceButton[i] = true;
+                }
+            }
+        }
+
+    }
 
 }
 

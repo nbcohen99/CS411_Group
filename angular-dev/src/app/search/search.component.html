@@ -400,7 +400,7 @@
         <form>
             <div class="form-group">
                 <label for="select">Choose from the following:</label>
-                <select (change)="getLyftResults(yelpAddresses[$event.target.value])" class="form-control" id="select">
+                <select (change)="getLyftResults(yelpAddresses[$event.target.value],$event.target.value)" class="form-control" id="select">
                     <!-- INSERT RESTAURANT NAMES -->
                     <option  *ngFor="let name of yelpNames; let i = index" value={{i}}>{{name}}</option>
                 </select>
@@ -416,19 +416,19 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Type of Ride</span>
                         </div>
-                        <label type="text" class="form-control" *ngIf="estimatesReady" aria-label="" disabled>{{lyftEstimatesData[1]}}</label>
+                        <label type="text" class="form-control" *ngIf="estimatesReady" aria-label="" disabled>{{lyftType}}</label>
                         <div class="input-group-append">
                             <span class="input-group-text">Min Ride</span>
                         </div>
-                        <label type="text" class="form-control" *ngIf="estimatesReady" aria-label="" disabled>{{lyftEstimatesData[2]}}</label>
+                        <label type="text" class="form-control" *ngIf="estimatesReady" aria-label="" disabled>{{lyftMin}}</label>
                         <div class="input-group-append">
                             <span class="input-group-text">Max Ride </span>
                         </div>
-                        <label type="text" class="form-control" *ngIf="estimatesReady" aria-label="" disabled>{{lyftEstimatesData[3]}}</label>
+                        <label type="text" class="form-control" *ngIf="estimatesReady" aria-label="" disabled>{{lyftMax}}</label>
                         <div class="input-group-append">
                             <span class="input-group-text">Est. Time</span>
                         </div>
-                        <label type="text" class="form-control" *ngIf="estimatesReady" aria-label="" disabled>{{lyftEstimatesData[4]}}</label>
+                        <label type="text" class="form-control" *ngIf="estimatesReady" aria-label="" disabled>{{lyftTime}}</label>
                     </div>
                 </form>
             </div>
