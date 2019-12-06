@@ -131,8 +131,15 @@
     </nav>
     <div class="container-fluid-small"></div>
     <div class="container-fluid-full">
-        <input #groupInput placeholder="Enter Group Name">
-        <button (click)="createGroup(groupInput.value)">Create New Group</button>
+        <form>
+            <div class="input-group" style="width:500px;">
+                <input #groupInput type="text" class="form-control" placeholder="Enter Group Name">
+                <div class="input-group-append">
+                    <button type="button" style="background-color: #6E757D; color:#ffffff;" class="btn btn-default" (click)="createGroup(groupInput.value)">Create New Group</button>
+                </div>
+            </div>
+        </form>
+
     </div>
  
     <!-- GROUP TEMPLATE -->
