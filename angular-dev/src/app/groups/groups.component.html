@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -121,76 +121,29 @@
         </ul>
     </nav>
     <div class="container-fluid-small"></div>
-    <div class="container-fluid-full">
-        <input #groupInput placeholder="Enter Group Name">
-        <button (click)="createGroup(groupInput.value)">Create New Group</button>
-        <ul class="groups">
-            <li *ngFor="let group of groups"><button (click)="leaveGroup(group.id)">Leave</button>Group:  {{group.name}}   Users: {{group.userIDs}}
-            </li>
-        </ul>
-    </div>
+    
  
     <!-- GROUP TEMPLATE -->
-    <div class="container-fluid bg-2">
+    <div *ngFor="let group of groups;let i = index;" class="container-fluid bg-2">
         <div class="card-deck">
             <div class="card">
                 <div class="card-body text-center">
-                    <p class="card-text" style="color: black;">GROUP NAME</p>
+                    <p class="card-text" style="color: black;">{{group.name}}</p>
+                    <button (click)="leaveGroup(group.id)">Leave</button>
                     <div class="card-deck">
-                            <div class="card bg-primary">
+                            <div *ngFor="let user of users[i]" class="card bg-primary">
                               <div class="card-body text-center">
-                                <p class="card-text">NAME</p>
+                                <p class="card-text">{{user.name}}</p>
                                 <img src="assets/img/icon.png" class="img-responsive img-circle margin" style="border: 3px solid #154360; display:inline" alt="Icon" width="50" height="50">
                                 <br><br>
                                 <button type="button" style="background-color:#f14e4e; border: #f14e4e;" class="btn btn-primary">Kick</button>
                               </div>
                             </div>
-                            <div class="card bg-warning">
-                              <div class="card-body text-center">
-                                    <p class="card-text">NAME</p>
-                                    <img src="assets/img/icon.png" class="img-responsive img-circle margin" style="border: 3px solid #154360; display:inline" alt="Icon" width="50" height="50">
-                                    <br><br>
-                                    <button type="button" style="background-color:#f14e4e; border: #f14e4e;" class="btn btn-primary">Kick</button>
-                              </div>
-                            </div>
-                            <div class="card bg-success">
-                              <div class="card-body text-center">
-                                    <p class="card-text">NAME</p>
-                                    <img src="assets/img/icon.png" class="img-responsive img-circle margin" style="border: 3px solid #154360; display:inline" alt="Icon" width="50" height="50">
-                                    <br><br>
-                                    <button type="button" style="background-color:#f14e4e; border: #f14e4e;" class="btn btn-primary">Kick</button>
-                              </div>
-                            </div>
-                            <div class="card bg-danger">
-                              <div class="card-body text-center">
-                                    <p class="card-text">NAME</p>
-                                    <img src="assets/img/icon.png" class="img-responsive img-circle margin" style="border: 3px solid #154360; display:inline" alt="Icon" width="50" height="50">
-                                    <br><br>
-                                    <button type="button" style="background-color:#f14e4e; border: #f14e4e;" class="btn btn-primary">Kick</button>
-                              </div>
-                            </div>
-                          </div>
+                           
+                    </div>
                 </div>
             </div>
-            <div class="card">
-                <div class="card-body text-center">
-                    <p class="card-text" style="color: black;">GROUP NAME</p>
-                </div>
-            </div>
-            <!--
-            <div class="card bg-success">
-                <div class="card-body text-center">
-                    <p class="card-text">Some text inside the third card</p>
-                </div>
-            </div>
-            <div class="card bg-danger">
-                <div class="card-body text-center">
-                    <p class="card-text">Some text inside the fourth card</p>
-                </div>
-            </div>
-            -->
         </div>
-
     </div>
     
 

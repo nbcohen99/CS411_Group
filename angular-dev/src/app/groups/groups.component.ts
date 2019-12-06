@@ -15,6 +15,7 @@ export class GroupsComponent implements OnInit {
     private user: User;
     private data: string = "";
     private groups: Group[] = [];
+    private users: User[][] = [[]];
 
     constructor(
         private cookieService: CookieService,
@@ -43,23 +44,31 @@ export class GroupsComponent implements OnInit {
     public updateGroupList() {
 
             var userID = this.cookieService.get("user-id");
-
             this.userService.getUserByID(userID).subscribe(users => {
                 if (users.length != 1) {
                     this.redirect.navigate(['/']);
                     return;
                 }
-
                 this.user = (<User>users[0]);
-
                 this.data = "";
                 this.groups = [];
+                this.users = [[]];
+
                 for (var i = 0; i < this.user.groups.length; i++) {
                     this.groupService.getGroupByID(this.user.groups[i]).subscribe(group => {
                         if (group.length == 1) {
                             console.log("pushed: " + group[0]);
                             this.groups.push(group[0]);
                             this.data += group[0] + "\n";
+                            for (var i = 0; i < group[0].userIDs.length; i++) {
+                                this.userService.getUserByID(group[0].userIDs[i]).subscribe(users2 => {
+                                    if (users2.length == 1) {
+                                        console.log("found user belonging to group " + i + " name: " + users2[0].name);
+                                        this.users[this.users.length - 1].push(users2[0]);
+                                    }
+                                });
+                            }
+                            
                         }
                     });
                 }
