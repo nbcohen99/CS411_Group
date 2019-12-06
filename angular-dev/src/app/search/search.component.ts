@@ -10,23 +10,29 @@ import { Observable, range } from 'rxjs';
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  yelpNames: any[];
-  yelpAddresses: any[];
+  
+  yelpNames: any[]; // store restaurant results
+  yelpAddresses: any[]; // store restaurant addresses, same index as yelpNames
 
-  lyftEstimates: LyftEstimate[];
-  lyftEstimatesData: string[];
+  lyftEstimates: LyftEstimate[]; // store lyft posibilites as objects
+  lyftEstimatesData: string[]; // display lyft options in a parsed string
 
-  enteredCurrentLocation: boolean = false;
+  enteredCurrentLocation: boolean = false; // is user not using current location
   enteredAddress: string;
   currentAddress: string;
   currentLat: number;
   currentLong: number;
   destinationLat: number;
   destinationLong: number;
-  currentLocation: any;
+  currentLocation: any; // address of current location, used to autofill box after location is found
+
+  categories: string[]; // Filters for yelp searching
+  priceFilter: string;
+  radiusFilter: number;
   
 
   lyftDeepLink: string;
+  venmoDeepLink: string;
 
   constructor(
     private yelpSearch: YelpSearchService,
@@ -38,16 +44,13 @@ export class SearchComponent implements OnInit {
 
   }
 
-  searchYelp(query: string, currentLocation: string, currentLocationEntered: boolean) {
-    
-    if (currentLocationEntered) {
-      this.enteredAddress = currentLocation;
-      this.enteredCurrentLocation = true;
-    }
-    else {
-      this.enteredCurrentLocation = false;
-    }
-    // resets the data with each search
+  // starter function call that takes in all filters and parameters needed
+  startProcess(
+    currentLocation: string, 
+    currentLocationEntered: boolean
+    ) {     
+
+    // resets all displayed data with each search
     this.yelpNames = [];
     this.yelpAddresses = [];
     this.lyftEstimates = [];
@@ -57,16 +60,36 @@ export class SearchComponent implements OnInit {
     this.destinationLat = null;
     this.destinationLong = null;
 
-    this.yelpSearch.getData(query).subscribe(
+
+    this.searchYelp(this.categories.toString(), currentLocation, currentLocationEntered);
+    }
+
+
+  // calls backend to get Yelp list of restaurants based on filters
+  searchYelp(categories: string, currentLocation: string, currentLocationEntered: boolean) {
+    
+    
+    if (currentLocationEntered) {
+      this.enteredAddress = currentLocation;
+      this.enteredCurrentLocation = true;
+    }
+    else {
+      this.enteredCurrentLocation = false;
+    }
+
+    this.yelpSearch.getData(categories, this.priceFilter, this.radiusFilter).subscribe(
       (data: any) => {
         for (var i = 0; i < 20; i++) {
           // TODO: build interface for returned data
           var business = { name: null, location: { display_address: null } };
-          // if (!(data.businesses === "undefined")) {
+          
+          
           business = data.businesses[i];
+
+          // send returned data to displayed data
           this.yelpNames.push(business.name);
           this.yelpAddresses.push(business.location.display_address[0] + business.location.display_address[1]);
-          // }
+          
         }
       }
 
@@ -75,21 +98,23 @@ export class SearchComponent implements OnInit {
   }
 
 
+  // parses price and time estimates given general name of place
   getLyftResults(destinationAddress: string) {
-    // parses price and time estimates given general name of place
+    
     this.lyftEstimates = [];
     this.lyftEstimatesData = [""];
     if (this.enteredCurrentLocation) {
+      // need to get coords for entered location
       this.getCurrentLocation(this.enteredAddress, destinationAddress);
     }
     else{
       this.addressLyft(destinationAddress);
     }
-    //var allRides = this.estimateLyft("42.3496428","-71.0943789", this.lyftResultsLat, this.lyftResultsLong)
 
   }
 
 
+  // gets coords of a given location
   getCurrentLocation(currentAddress: string, destinationAddress: string) {
     var location = { display_address: null, lat: null, lng: null, place_id: null, routable_address: null }
 
@@ -112,13 +137,17 @@ export class SearchComponent implements OnInit {
 
 
 
-
+  // Gets price and time estimates for several Lyft options
   estimateLyft(start_lat:string, start_long, end_lat, end_long) {
-    // Gets price and time estimates for several Lyft options
-
+    
     //var sample_coords = ["42.3496428", "-71.0943789", "42.349341", "-71.1039816"];
 
-    this.lyftSearch.getPriceEstimate(start_lat.substring(0, 9), start_long.substring(0, 9), end_lat.substring(0, 9), end_long.substring(0, 9)).subscribe(
+    // takes substring to 'round' numbers
+    this.lyftSearch.getPriceEstimate(
+      start_lat.substring(0, 9), 
+      start_long.substring(0, 9), 
+      end_lat.substring(0, 9), 
+      end_long.substring(0, 9)).subscribe(
       (data: any) => {
         // TODO: build interface for returned data
         var trip = {
@@ -130,20 +159,25 @@ export class SearchComponent implements OnInit {
 
         var rides = { cost_estimates: [] }
 
+        // get all possible ride estimates
         rides = data;
         for (var i = 0; i < rides.cost_estimates.length; i++) {
           this.lyftEstimates.push(rides.cost_estimates[i]);
         }
         this.lyftEstimatesData = [""];
         for (var i = 0; i < this.lyftEstimates.length; i++) {
-          var minutes = this.lyftEstimates[i].estimated_duration_seconds / 60;
-          var minDecimalIndex = minutes.toString().indexOf(".");
-          var seconds = this.lyftEstimates[i].estimated_duration_seconds -
-            (parseInt(minutes.toString().substring(0, minDecimalIndex)) * 60);
+          var parsedData = this.parseEstimate(
+            this.lyftEstimates[i].estimated_duration_seconds,
+            this.lyftEstimates[i].estimated_cost_cents_min,
+            this.lyftEstimates[i].estimated_cost_cents_max);
+          var minutes = parsedData[0];
+          var seconds = parsedData[1]
+          var minCost = parsedData[2];
+          var maxCost = parsedData[3];
           this.lyftEstimatesData.push("name = " + this.lyftEstimates[i].display_name +
-            " ---------- estimated price: $" + this.lyftEstimates[i].estimated_cost_cents_min / 100 +
-            " to $" + this.lyftEstimates[i].estimated_cost_cents_max / 100 +
-            " ---------- estimated time is about " + minutes.toString().substring(0, minDecimalIndex) +
+            " ---------- estimated price: $" + minCost +
+            " to $" + maxCost +
+            " ---------- estimated time is about " + minutes +
             " minutes and " + seconds + " seconds");
         }
       }
@@ -151,8 +185,17 @@ export class SearchComponent implements OnInit {
 
   }
 
+  // parses the returned data from cents and seconds into dollars and minutes
+  parseEstimate(estimatedTime: number, minCost: number, maxCost: number) {
+    var minutes = estimatedTime / 60;
+    var minDecimalIndex = minutes.toString().indexOf(".");
+    var seconds = estimatedTime - (parseInt(minutes.toString().substring(0, minDecimalIndex)) * 60);
+    return [minutes, seconds, minCost / 100, maxCost / 100]
+
+  }
 
 
+  // Find the coords of the user's entered location or get the current location through browser
   addressLyft(address: string) {
 
     if (!this.enteredCurrentLocation) {
@@ -189,6 +232,7 @@ export class SearchComponent implements OnInit {
 
   }
 
+  // Creates a Lyft deeplink for the selected destination and current location
   getLyftLink(rideType: string) {
     var lyftDeep = "lyft://ridetype";
     return lyftDeep + 
@@ -200,6 +244,7 @@ export class SearchComponent implements OnInit {
 
   }
 
+  // Creates a Venmo deeplink for the selected amount
   splitCheck(amount:number, groupSize:number, username:string) {
     var amountPerPerson = amount / groupSize;
     var venmoDeep = "venmo://paycharge?charge=pay&recipients=";
@@ -209,6 +254,7 @@ export class SearchComponent implements OnInit {
 }
 
 
+// Interface for results that come back from Lyft rides
 export interface LyftEstimate {
   currency: string;
   display_name: string;
