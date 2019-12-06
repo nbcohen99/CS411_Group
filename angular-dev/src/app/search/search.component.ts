@@ -203,9 +203,11 @@ export class SearchComponent implements OnInit {
         console.log(currentAddress);
         console.log(destinationAddress);
         var location = { display_address: null, lat: null, lng: null, place_id: null, routable_address: null }
-
+        console.log("Sending req");
         this.lyftSearch.getLatLong(currentAddress).subscribe(
             (data: any) => {
+                console.log("Got subscribe");
+                console.log(data);
                 location = data;
                 this.currentLat = location.lat;
                 this.currentLong = location.lng;
@@ -228,12 +230,15 @@ export class SearchComponent implements OnInit {
         //var sample_coords = ["42.3496428", "-71.0943789", "42.349341", "-71.1039816"];
 
         // takes substring to 'round' numbers
+        console.log("making third req");
         this.lyftSearch.getPriceEstimate(
             start_lat.substring(0, 9),
             start_long.substring(0, 9),
             end_lat.substring(0, 9),
             end_long.substring(0, 9)).subscribe(
                 (data: any) => {
+                    console.log("got it");
+                    console.log(data);
                     // TODO: build interface for returned data
                     var trip = {
                         display_name: null,
@@ -264,7 +269,8 @@ export class SearchComponent implements OnInit {
                             " to $" + maxCost +
                             " ---------- estimated time is about " + minutes +
                             " minutes and " + seconds + " seconds");
-                        if (i == this.testForIndex) {
+                        if (i == 1) {
+                            console.log("HERE");
                             this.lyftType = this.lyftEstimates[i].display_name;
                             this.lyftMin = "$"+minCost;
                             this.lyftMax = "$"+maxCost;
@@ -301,9 +307,12 @@ export class SearchComponent implements OnInit {
         }
 
         // Uses Lyft API to get full address, Long, Lat of given address
+        console.log("sending second req");
         var location = { display_address: null, lat: null, lng: null, place_id: null, routable_address: null }
         this.lyftSearch.getLatLong(address).subscribe(
             (data: any) => {
+                console.log("got it");
+                console.log(data);
 
 
                 location = data;
