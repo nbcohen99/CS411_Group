@@ -12,7 +12,9 @@ export class LogoutService {
         private cookieService: CookieService
     ) { }
 
-
+    /*
+     * Logs you out and redirects you to home page
+     */
     public logOut() {
         this.cookieService.set("user-id", "");
         this.cookieService.set("token", "");

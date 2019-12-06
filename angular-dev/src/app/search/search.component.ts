@@ -67,7 +67,8 @@ export class SearchComponent implements OnInit {
           this.yelpNames.push(business.name);
           this.yelpAddresses.push(business.location.display_address[0] + business.location.display_address[1]);
           // }
-        }
+            }
+            console.log("pushed to list");
       }
 
     )
@@ -75,7 +76,8 @@ export class SearchComponent implements OnInit {
   }
 
 
-  getLyftResults(destinationAddress: string) {
+    getLyftResults(destinationAddress: string) {
+        
     // parses price and time estimates given general name of place
     this.lyftEstimates = [];
     this.lyftEstimatesData = [""];
@@ -90,7 +92,9 @@ export class SearchComponent implements OnInit {
   }
 
 
-  getCurrentLocation(currentAddress: string, destinationAddress: string) {
+    getCurrentLocation(currentAddress: string, destinationAddress: string) {
+        console.log(currentAddress);
+        console.log(destinationAddress);
     var location = { display_address: null, lat: null, lng: null, place_id: null, routable_address: null }
 
 

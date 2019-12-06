@@ -96,8 +96,8 @@ export class LoginComponent implements OnInit {
                     var date = new Date();
                     date.setTime(date.getTime() + (20 * 60 * 1000));
                     this.userService.updateToken(userData.id, result.token);
-                    this.cookieService.set('user-id', userData.id, { 'expires': date });
-                    this.cookieService.set('token', result.token, { 'expires': date });
+                    this.cookieService.set('user-id', userData.id, date);
+                    this.cookieService.set('token', result.token, date);
 
                     console.log(result.token);
                     console.log("Saved user in cookies");
