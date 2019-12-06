@@ -20,7 +20,7 @@ export class YelpSearchService {
 
 
   // gets the data from yelp api given a search term
-  getData(term: string) {
+  getData(term: string, price: string, radius: number) {
     const token = 'CWUaTFyAkkwf9rR3ktjTru2TFcNzY4DDpza6eVvCSDHZ89YN1dRSckT0MT6vKU14WuA4nKqDAkc6E4tKFB7qUfqYOHo4W4BHSfv4n9c6u58GMn3TZbAGcVauc-upXXYx';
 
     let reqHeader = new HttpHeaders({
@@ -31,7 +31,9 @@ export class YelpSearchService {
       headers: reqHeader,
       params: {
         "location": "boston",
-        "term": term
+        "term": term,
+        "price": price,
+        "radius": radius.toString(),
       }
     })
   }
