@@ -104,12 +104,12 @@ export class LoginComponent implements OnInit {
                 });
                 
                 console.log('OAuth success.\nRedirecting...');
-                document.getElementById("multi_lines_text").innerHTML = '<p">Redirecting...<p>';
+                this.data = "Redirecting...";
                 // (new LoginComponent).login();
                 this.login();
             } else {
                 console.log('Invalid username or password.');
-                document.getElementById("multi_lines_text").innerHTML = '<p style="color: red">Authorization failed<p>';
+                this.data = "Authorization failed";
             }
         };
 

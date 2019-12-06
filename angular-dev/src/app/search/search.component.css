@@ -12,3 +12,105 @@
 .inputAddress input{
     width: 300px;
 }
+
+html * {
+    font-family: 'Source Sans Pro', sans-serif !important;
+}
+
+.bg-1 {
+    background-color: #4a5d34;
+    color: #ffffff;
+}
+
+.bg-2 {
+    background-color: #bee494;
+    color: #ffffff;
+}
+
+.bg-3 {
+    background-color: #afd189;
+    color: #ffffff;
+}
+
+.bg-4 {
+    background-color: #9fbf7b;
+    color: #ffffff;
+}
+
+
+.container-fluid {
+    padding-top: 24px;
+    padding-bottom: 30px;
+}
+
+.container-fluid-footer {
+    padding-top: 36px;
+    padding-bottom: 36px;
+}
+
+.container-fluid-small {
+    padding-top: 12px;
+    padding-bottom: 12px;
+}
+
+.container-fluid-pick {
+    padding-top: 24px;
+    padding-bottom: 1px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.container-fluid-pick-link {
+    padding-top: 1px;
+    padding-bottom: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+.container-fluid-filter {
+    padding-top: 24px;
+    padding-bottom: 1px;
+}
+
+.container-fluid-search {
+    padding-bottom: 24px;
+}
+
+.navbar {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    border: 0;
+    border-radius: 0;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+    background-color: #4a5d34 !important;
+}
+/* Navbar items to the right */
+.ml-auto .dropdown-menu {
+    left: auto !important;
+    right: 0px;
+}
+
+.navbar-nav li a:hover {
+    color: #bee494 !important;
+}
+
+/* Navtab colors */
+.nav li a {
+    color: #4a5d34 !important;
+}
+
+.nav-tabs li.active a, .nav-tabs li.active a:focus, .nav-tabs li.active a:hover {
+    background-color: #bee494 !important;
+    border-bottom-color: transparent !important;
+    border-color: #4a5d34;
+}
+
+.nav-tabs {
+    border-bottom-color: #4a5d34 !important;
+}
+
+.modal-body {
+    color: black;
+}
