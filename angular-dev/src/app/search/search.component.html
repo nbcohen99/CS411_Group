@@ -61,36 +61,36 @@
         <!-- DISTANCE -->
        
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary">
-                <input type="radio" name="options" id="Bird's-eye View" autocomplete="off" checked> Bird's-eye View
+            <label class="btn btn-secondary" [ngClass]="{'active': activeDistanceButton[0] == true}">
+                <input type="radio" name="options" (click)="updateActiveDistance(0)" id="Bird's-eye View" autocomplete="off" checked> Bird's-eye View (20 mi.)
             </label>
-            <label class="btn btn-secondary">
-                <input type="radio" name="options" id="Driving" autocomplete="off"> Driving (5 mi.)
+            <label class="btn btn-secondary" [ngClass]="{'active': activeDistanceButton[1] == true}">
+                <input type="radio" name="options" (click)="updateActiveDistance(1)" id="Driving" autocomplete="off"> Driving (5 mi.)
             </label>
-            <label class="btn btn-secondary">
-                <input type="radio" name="options" id="Biking" autocomplete="off"> Biking (2  mi.)
+            <label class="btn btn-secondary" [ngClass]="{'active': activeDistanceButton[2] == true}">
+                <input type="radio" name="options" (click)="updateActiveDistance(2)" id="Biking" autocomplete="off"> Biking (2  mi.)
             </label>
-            <label class="btn btn-secondary">
-                <input type="radio" name="options" id="Walking" autocomplete="off"> Walking (1 mi.)
+            <label class="btn btn-secondary" [ngClass]="{'active': activeDistanceButton[3] == true}">
+                <input type="radio" name="options" (click)="updateActiveDistance(3)" id="Walking" autocomplete="off"> Walking (1 mi.)
             </label>
-            <label class="btn btn-secondary">
-                <input type="radio" name="options" id="Within 4 blocks" autocomplete="off"> Within 4 blocks
+            <label class="btn btn-secondary" [ngClass]="{'active': activeDistanceButton[4] == true}">
+                <input type="radio" name="options" (click)="updateActiveDistance(4)" id="Within 4 blocks" autocomplete="off"> Within 4 blocks
             </label>
         </div>
 
         <!-- PRICE -->
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
-            <label class="btn btn-secondary active">
-                <input type="checkbox" autocomplete="off"> $
+            <label class="btn btn-secondary" [ngClass]="{'active': activePriceButton[0] == true}">
+                <input type="checkbox" (click)="updateActivePrice(0)" autocomplete="off"> $
             </label>
-            <label class="btn btn-secondary active">
-                <input type="checkbox" autocomplete="off"> $$
+            <label class="btn btn-secondary" [ngClass]="{'active': activePriceButton[1] == true}">
+                <input type="checkbox" (click)="updateActivePrice(1)" autocomplete="off"> $$
             </label>
-            <label class="btn btn-secondary active">
-                <input type="checkbox" autocomplete="off"> $$$
+            <label class="btn btn-secondary" [ngClass]="{'active': activePriceButton[2] == true}">
+                <input type="checkbox" (click)="updateActivePrice(2)" autocomplete="off"> $$$
             </label>
-            <label class="btn btn-secondary active">
-                <input type="checkbox" autocomplete="off"> $$$$
+            <label class="btn btn-secondary" [ngClass]="{'active': activePriceButton[3] == true}">
+                <input type="checkbox" (click)="updateActivePrice(3)" autocomplete="off"> $$$$
             </label>
         </div>
         <!-- CATEGORIES -->
@@ -268,10 +268,11 @@
                 </div>
             </div>
             <div class="col text-right" style="padding-right: 118px;">
-                <input #searchLyftInput placeholder="Enter your current location for Lyft"
-                       (keyup.enter)="searchYelp(searchInput.value, searchLyftInput.value, true)">
-                <input #searchInput class="textField" placeholder="Search Term">
+                <input #searchLyftInput placeholder="Enter your current location">
+                <input #searchInput class="textField" placeholder="Search Term" 
+                       (keyup.enter)="searchYelp(searchInput.value, searchInput.value, true)">
                 <button type="button" style="background-color:#f14e4e; border:#f14e4e;" class="btn btn-primary" (click)="searchYelp(searchInput.value, searchLyftInput.value, true)">Search</button>
+                <button type="button" style="background-color:#f14e4e; border:#f14e4e;" class="btn btn-primary" (click)="searchYelp(searchInput.value, searchLyftInput.value, false)">Use Current Location</button>
             </div>
         </div>
     </div>
@@ -297,19 +298,19 @@
                         <div class="input-group-prepend">
                             <span class="input-group-text">Type of Ride</span>
                         </div>
-                        <label type="text" class="form-control" aria-label="" disabled>{{lyftEstimatesData[1]}}</label>
+                        <label type="text" class="form-control" *ngIf="estimatesReady" aria-label="" disabled>{{lyftEstimatesData[1]}}</label>
                         <div class="input-group-append">
                             <span class="input-group-text">Min Ride</span>
                         </div>
-                        <label type="text" class="form-control" aria-label="" disabled>{{lyftEstimatesData[2]}}</label>
+                        <label type="text" class="form-control" *ngIf="estimatesReady" aria-label="" disabled>{{lyftEstimatesData[2]}}</label>
                         <div class="input-group-append">
                             <span class="input-group-text">Max Ride </span>
                         </div>
-                        <label type="text" class="form-control" aria-label="" disabled>{{lyftEstimatesData[3]}}</label>
+                        <label type="text" class="form-control" *ngIf="estimatesReady" aria-label="" disabled>{{lyftEstimatesData[3]}}</label>
                         <div class="input-group-append">
                             <span class="input-group-text">Est. Time</span>
                         </div>
-                        <label type="text" class="form-control" aria-label="" disabled>{{lyftEstimatesData[4]}}</label>
+                        <label type="text" class="form-control" *ngIf="estimatesReady" aria-label="" disabled>{{lyftEstimatesData[4]}}</label>
                     </div>
                 </form>
             </div>
