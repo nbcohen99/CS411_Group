@@ -15,6 +15,6 @@ Our web app [Split Check](https://splitcheck.github.io/) uses the Mongo-Express-
 Install first node and angular.  Then:
 ```shell
 cd angular-dev
-npm build
+npm install
 ng build
 ```
