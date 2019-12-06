@@ -1,4 +1,4 @@
-<!--
+﻿<!--
 
 <input class="textField" #searchInput placeholder="Search Term" (keyup.enter)="searchYelp(searchInput.value)">
 
@@ -447,10 +447,17 @@
         <div class="row">
             <div class="col">
                 <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">@</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Venmo Username">
+                    <label for="select">Choose your group:</label>
+                    <select (change)="getGroupMembers($event.target.value)" class="form-control" id="select">
+                        <option value="-1">Choose a Group</option>
+                        <option *ngFor="let group of groupList; let i = index" value={{i}}>{{group.name}}</option>
+                    </select>
+                </div>
+                <label>Group Members:</label>
+                <div class="input-group">
+                    <ul>
+                        <li *ngFor="let member of memberList;let i = index" type="checkbox" name="member" value={{member.id}}><button class="btn-secondary" (click)="removeMember(i)">Omit</button>{{member.name}} 
+                    </ul>
                 </div>
             </div>
             <div class="col text-right">

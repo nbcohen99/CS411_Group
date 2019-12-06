@@ -1,8 +1,8 @@
 export class Group {
-    id: String;
-    name: String;
-    ownerID: String;
-    userIDs: String[];
+    id: string;
+    name: string;
+    ownerID: string;
+    userIDs: string[];
 
     deserialize(input: any) {
         Object.assign(this, input);
