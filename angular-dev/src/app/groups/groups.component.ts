@@ -42,7 +42,7 @@ export class GroupsComponent implements OnInit {
 
 
     public updateGroupList() {
-        
+
             var userID = this.cookieService.get("user-id");
             this.userService.getUserByID(userID).subscribe(users => {
                 if (users.length != 1) {
@@ -74,8 +74,8 @@ export class GroupsComponent implements OnInit {
                 }
 
             });
-        
-        
+
+
 
     }
 
@@ -94,6 +94,6 @@ export class GroupsComponent implements OnInit {
         this.userService.leaveGroup(this.user.id, groupID).subscribe(e => {
             this.updateGroupList();
         });
-        
+
     }
 }
