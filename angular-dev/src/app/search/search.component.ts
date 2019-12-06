@@ -9,6 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { GroupService } from '../services/group.service';
+import { EmailService } from '../services/email.service';
 
 @Component({
     selector: 'app-search',
@@ -41,8 +42,8 @@ export class SearchComponent implements OnInit {
     destinationLong: number;
     currentLocation: any; // address of current location, used to autofill box after location is found
 
-    categories: string[]; // Filters for yelp searching
-    priceFilter: string[];
+    categories: string[] = []; // Filters for yelp searching
+    priceFilter: string[] = [];
     radiusFilter: number;
 
     activeDistanceButton: boolean[]; // array to determine which distance button is active
@@ -51,6 +52,7 @@ export class SearchComponent implements OnInit {
 
     lyftDeepLink: string;
     venmoDeepLink: string;
+    username: string;
 
     groupList: Group[] = [];
     memberList: User[] = [];
@@ -61,7 +63,8 @@ export class SearchComponent implements OnInit {
         private cookieService: CookieService,
         private userService: UserService,
         private groupService: GroupService,
-        private redirect: Router
+        private redirect: Router,
+        private emailService: EmailService
     ) { }
 
 
@@ -347,10 +350,20 @@ export class SearchComponent implements OnInit {
     }
 
     // Creates a Venmo deeplink for the selected amount
-    splitCheck(amount: number, username: string) {
-        var amountPerPerson = amount / this.memberList.length;
-        var venmoDeep = "venmo://paycharge?charge=pay&recipients=";
-        return venmoDeep + username + "&amount=" + amountPerPerson + "&note=Bill paid using Splitcheck";
+    splitCheck(amount: number) {
+        var amountPerPerson = (Math.round((amount / this.memberList.length) * 100) / 100).toFixed(2);
+        var venmoDeep = "<a href=\"venmo://paycharge?charge=pay&recipients=" + this.username + "&amount=" + amountPerPerson + "&note=Bill paid using Splitcheck\">Click to open Venmo!</a>";
+        return venmoDeep;
+    }
+
+    sendVenmoRequests(price: number) {
+        var msg = this.splitCheck(price);
+        console.log("HERE!");
+        console.log(this.memberList);
+        for (var i = 0; i < this.memberList.length; i++) {
+            console.log("send to " + this.memberList[i].name);
+            this.emailService.sendEmailToUser(this.memberList[i].id, msg);
+        }
     }
 
     // updates the distance filter and the button is active
