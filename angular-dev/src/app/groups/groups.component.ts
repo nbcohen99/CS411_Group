@@ -72,8 +72,13 @@ export class GroupsComponent implements OnInit {
 
     public createGroup(groupName: string) {
         this.groupService.createGroup(groupName, this.user.id).subscribe(data => {
-            this.updateGroupList();
+            setTimeout(function () {
+                this.updateGroupList();
+            }.bind(this), 1000);
         });
+        setTimeout(function () {
+            this.updateGroupList();
+        }.bind(this), 1000);
     }
 
     public leaveGroup(groupID: string) {
