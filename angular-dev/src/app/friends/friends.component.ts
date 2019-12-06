@@ -12,8 +12,12 @@ import { Group } from '../models/group.model';
   styleUrls: ['./friends.component.css']
 })
 export class FriendsComponent implements OnInit {
+  private user: User;
+  private data: string = "";
+  private groups: Group[] = [];
+  private users: User[] = [];
 
-  testhtml = "<p>Searching for potential friends...</p>";
+  texthtml = "<p>Searching for potential friends...</p>";
 
   constructor(
     private cookieService: CookieService,
@@ -29,14 +33,19 @@ export class FriendsComponent implements OnInit {
       console.log("Individual users:")
       var i: number;
       this.data = "";
+      this.users = users;
       for (i = 0; i < users.length; i++){
         this.data += '@' + users[i].name.toLowerCase().split(' ').join('');
         this.data += '&nbsp;&nbsp;&nbsp;&nbsp;';
-        this.data += '<input onclick="alert()">Add ' + users[i].name.split(' ')[0] + '</input>';
+        this.data += '<input (click)="add()">Add ' + users[i].name.split(' ')[0] + '</input>';
         this.data += '<br><br>';
       }
-      this.testhtml = this.data;
+      this.texthtml = this.data;
     });
   }
+
+  // public add() {
+  //   // alert(id);
+  // }
 
 }

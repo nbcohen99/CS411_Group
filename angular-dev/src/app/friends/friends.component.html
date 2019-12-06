@@ -126,8 +126,14 @@
             </ul>
         </nav>
     <div class="container-fluid-full">
-        <p>Add friends</p>
-        <div [innerHtml]="testhtml"></div>
+        <span>Add your friends here.</span>
+        <br><br>
+        <div *ngFor="let user of users">
+          @{{user.name.toLowerCase().split(' ').join('')}}
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <button (click)=this.add()>Add {{user.name.split(' ')[0]}}</button>
+          <br><br>
+        </div>
     </div>
 
 
