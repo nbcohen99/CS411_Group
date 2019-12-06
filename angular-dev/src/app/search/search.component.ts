@@ -155,7 +155,7 @@ export class SearchComponent implements OnInit {
       this.priceFilter = ["1", "2", "3", "4"];
     }
     // default radius to 2 miles
-    if (this.radiusFilter == null || this.radiusFilter) {
+    if (this.radiusFilter == null) {
       this.radiusFilter = 3218;
     }
     this.yelpSearch.getData(categories, this.priceFilter.toString(), this.radiusFilter).subscribe(
@@ -165,7 +165,7 @@ export class SearchComponent implements OnInit {
           // TODO: build interface for returned data
           var business = { name: null, location: { display_address: null } };
 
-
+          business = data.businesses[i];
           // send returned data to displayed data
           this.yelpNames.push(business.name);
           this.yelpAddresses.push(business.location.display_address[0] + business.location.display_address[1]);
@@ -373,8 +373,12 @@ export class SearchComponent implements OnInit {
         if (i === index) {
           this.activeDistanceButton[i] = true;
         }
+        else{
+          this.activeDistanceButton[i] = false;
+        }
       }
     }
+    console.log(this.activeDistanceButton);
   }
 
 
