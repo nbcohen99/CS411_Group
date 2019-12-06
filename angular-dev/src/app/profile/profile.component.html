@@ -21,12 +21,17 @@
         }
 
         .bg-1 {
-            background-color: #ffffff;
-            color: #154360;
+        background-color: #4a5d34;
+        color: #ffffff;
         }
 
         .bg-2 {
-            background-color: #45b39d;
+            background-color: #bee494;
+            color: #ffffff;
+        }
+
+        .bg-3 {
+            background-color: #afd189;
             color: #ffffff;
         }
 
@@ -49,16 +54,20 @@
             padding-bottom: 12px;
             padding-left: 12px;
         }
-
-        .navbar {
+        .container-fluid-small {
             padding-top: 12px;
             padding-bottom: 12px;
-            border: 0;
-            border-radius: 0;
-            margin-bottom: 0;
-            font-size: 12px;
-            letter-spacing: 5px;
-            background-color: #154360 !important;
+        }
+
+        .navbar {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        border: 0;
+        border-radius: 0;
+        margin-bottom: 0;
+        font-size: 12px;
+        letter-spacing: 5px;
+        background-color: #4a5d34 !important;
         }
         /* Navbar items to the right */
         .ml-auto .dropdown-menu {
@@ -67,53 +76,71 @@
         }
 
         .navbar-nav li a:hover {
-            color: #45b39d !important;
+            color: #bee494 !important;
+        }
+
+        /* Navtab colors */
+        .nav li a {
+            color: #4a5d34 !important;
+        }
+
+        .nav-tabs li.active a, .nav-tabs li.active a:focus, .nav-tabs li.active a:hover {
+            background-color: #bee494 !important;
+            border-bottom-color: transparent !important;
+            border-color: #4a5d34;
+        }
+
+        .nav-tabs {
+            border-bottom-color: #4a5d34 !important;
         }
     </style>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="user.html">
-            <img src="assets/img/logoblue.png" class="rounded-circle" alt="Logo" style="width: 40px;">
-        </a>
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/profile">PROFILE</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/groups">GROUPS</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" routerLink="/database">DEV-DATABASE</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" (click)="logOut()">LOGOUT</a>
-            </li>
-        </ul>
-
-    </nav>
-    <div class="container-fluid-header bg-1 text-left">
-        <h2 class="margin">PROFILE</h2>
-    </div>
+            <a class="navbar-brand" routerLink="/profile">
+                <img src="assets/img/logo.png" class="rounded-circle" alt="logo" style="width: 40px;">
+            </a>
+            <h2>PROFILE</h2>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                        <a class="nav-link" routerLink="/profile">PROFILE</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" routerLink="/friends">FRIENDS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/groups">GROUPS</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" routerLink="/search">SEARCH</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link" routerLink="/database">DEV-DATABASE</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" (click)="logOut()">LOGOUT</a>
+                </li>
+            </ul>
+        </nav>
+    <div class="container-fluid-small"></div>
     <div class="container-fluid bg-2">
         <div class="row">
             <div class="col-sm-4 text-center">
-                <img src="assets/img/iconblue.png" class="img-responsive img-circle margin" style="border: 3px solid #154360; display:inline" alt="Icon" width="200" height="200">
+                <img src="assets/img/icon.png" class="img-responsive img-circle margin" style="border: 3px solid #154360; display:inline" alt="Icon" width="200" height="200">
                 <h3>{{fullName}}</h3>
             </div>
             <div class="col-sm-4 text-center">
-                <img src="assets/img/uniconblue.png" class="img-responsive img-circle margin" style="border: 3px solid #154360; display: inline;" alt="UN" width="200" height="200">
+                <img src="assets/img/unicon.png" class="img-responsive img-circle margin" style="border: 3px solid #154360; display: inline;" alt="UN" width="200" height="200">
                 <h3>@USER_NAME</h3>
             </div>
             <div class="col-sm-4 text-center">
-                <img src="assets/img/asbiconblue.png" class="img=img-responsive img-circle margin" style="border: 3px solid #154360; display: inline;" alt="AS" width="200" height="200">
-                <h3>member of {{groups}} groups</h3>
+                <img src="assets/img/asbicon.png" class="img=img-responsive img-circle margin" style="border: 3px solid #154360; display: inline;" alt="AS" width="200" height="200">
+                <h3>Member of {{groups}} Groups</h3>
             </div>
         </div>
     </div>
-    <div class="container-fluid-header bg-1 text-left">
-    </div>
+    <div class="container-fluid-small"></div>
     <div class="container-fluid bg-2">
         <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Iure, repellat, pariatur illo, provident earum aspernatur eos dignissimos commodi harum rerum quis dolor ea! Vitae debitis non veniam nam pariatur! Accusamus?</p>
     </div>

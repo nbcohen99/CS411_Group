@@ -50,16 +50,20 @@
             padding-bottom: 12px;
             padding-left: 12px;
         }
-
-        .navbar {
+        .container-fluid-small {
             padding-top: 12px;
             padding-bottom: 12px;
-            border: 0;
-            border-radius: 0;
-            margin-bottom: 0;
-            font-size: 12px;
-            letter-spacing: 5px;
-            background-color: #154360 !important;
+        }
+
+        .navbar {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        border: 0;
+        border-radius: 0;
+        margin-bottom: 0;
+        font-size: 12px;
+        letter-spacing: 5px;
+        background-color: #4a5d34 !important;
         }
         /* Navbar items to the right */
         .ml-auto .dropdown-menu {
@@ -68,40 +72,55 @@
         }
 
         .navbar-nav li a:hover {
-            color: #45b39d !important;
+            color: #bee494 !important;
+        }
+
+        /* Navtab colors */
+        .nav li a {
+            color: #4a5d34 !important;
+        }
+
+        .nav-tabs li.active a, .nav-tabs li.active a:focus, .nav-tabs li.active a:hover {
+            background-color: #bee494 !important;
+            border-bottom-color: transparent !important;
+            border-color: #4a5d34;
+        }
+
+        .nav-tabs {
+            border-bottom-color: #4a5d34 !important;
         }
     </style>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" routerLink="/">
-            <img src="assets/img/logoblue.png" class="rounded-circle" alt="Logo" style="width: 40px;">
+        <a class="navbar-brand" routerLink="/profile">
+            <img src="assets/img/logo.png" class="rounded-circle" alt="logo" style="width: 40px;">
         </a>
+        <h2>GROUPS</h2>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" routerLink="/search" routerLinkActive="active">SEARCH</a>
+                    <a class="nav-link" routerLink="/profile">PROFILE</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/friends" routerLinkActive="active">FRIENDS</a>
+                    <a class="nav-link" routerLink="/friends">FRIENDS</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/groups" routerLinkActive="active">GROUPS</a>
+                <a class="nav-link" routerLink="/groups">GROUPS</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" routerLink="/database" routerLinkActive="active">DEV-DATABASE</a>
+                    <a class="nav-link" routerLink="/search">SEARCH</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="logOut()">LOGOUT</a>
             </li>
         </ul>
-
     </nav>
-    <div class="container-fluid-header bg-1 text-left">
-        <h2 class="margin">GROUPS</h2>
-    </div>
+    <div class="container-fluid-small"></div>
     <div>
         <input #groupInput placeholder="Enter Group Name">
         <button (click)="createGroup(groupInput.value)">Create New Group</button>
         <ul class="groups">
-
             <li *ngFor="let group of groups"><button (click)="leaveGroup(group.id)">Leave</button>Group:  {{group.name}}   Users: {{group.userIDs}}
             </li>
         </ul>
