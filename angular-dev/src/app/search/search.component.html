@@ -472,7 +472,7 @@
                 <label>Group Members:</label>
                 <div class="input-group">
                     <ul>
-                        <li *ngFor="let member of memberList;let i = index" type="checkbox" name="member" value={{member.id}}><button class="btn-secondary" (click)="removeMember(i)">Omit</button>{{member.name}} 
+                        <li *ngFor="let member of memberList;let i = index" type="checkbox" name="member" value={{member.id}}><button class="btn btn-secondary btn-sm" (click)="removeMember(i)">Omit</button> {{member.name}} 
                     </ul>
                 </div>
             </div>
