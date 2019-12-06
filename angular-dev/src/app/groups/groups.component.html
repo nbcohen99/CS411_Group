@@ -31,6 +31,15 @@
             color: #ffffff;
         }
 
+        .bg-3 {
+            background-color: #afd189;
+            color: #ffffff;
+        }
+
+        .bg-4 {
+            background-color: #9fbf7b;
+            color: #ffffff;
+        }
         .container {
             padding: 15px;
         }
@@ -131,19 +140,20 @@
         <div class="card-deck">
             <div class="card">
                 <div class="card-body text-center">
-                    <p class="card-text" style="color: black;">{{group.name}}</p>
-                    <button (click)="leaveGroup(group.id)">Leave</button>
+                    <h4 class="card-text" style="color: black;">{{group.name}}</h4>
+                    
                     <div class="card-deck">
-                            <div *ngFor="let user of users[i]" class="card bg-primary">
-                              <div class="card-body text-center">
+                        <div *ngFor="let user of users[i]" class="card bg-4">
+                          <div class="card-body text-center">
                                 <p class="card-text">{{user.name}}</p>
                                 <img src="assets/img/icon.png" class="img-responsive img-circle margin" style="border: 3px solid #154360; display:inline" alt="Icon" width="50" height="50">
                                 <br><br>
-                                <button type="button" style="background-color:#f14e4e; border: #f14e4e;" class="btn btn-primary">Kick</button>
-                              </div>
-                            </div>
-                           
+                            <button type="button" style="background-color:#f14e4e; border: #f14e4e;" class="btn btn-primary">Kick</button>
+                          </div>
+                        </div>
                     </div>
+                    <br>
+                    <button type="button" style="background-color:#f14e4e; border: #f14e4e;" class="btn btn-primary" (click)="leaveGroup(group.id)">Leave</button>
                 </div>
             </div>
         </div>
