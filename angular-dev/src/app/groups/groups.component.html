@@ -121,7 +121,10 @@
         </ul>
     </nav>
     <div class="container-fluid-small"></div>
-    
+    <div class="container-fluid-full">
+        <input #groupInput placeholder="Enter Group Name">
+        <button (click)="createGroup(groupInput.value)">Create New Group</button>
+    </div>
  
     <!-- GROUP TEMPLATE -->
     <div *ngFor="let group of groups;let i = index;" class="container-fluid bg-2">
