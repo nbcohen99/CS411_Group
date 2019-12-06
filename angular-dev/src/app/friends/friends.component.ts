@@ -75,7 +75,7 @@ export class FriendsComponent implements OnInit {
             let userID = users[0].id;
             console.log('Make users ' + userID + ' and ' + friendID + ' friends.');
             this.userService.removeFriend(userID, friendID);
-            this.userService.removeFriend(friendID, userID);  // Assume the friendship is two-sided :D
+            this.userService.removeFriend(friendID, userID);
         }
     });
   }

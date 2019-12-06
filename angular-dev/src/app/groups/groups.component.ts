@@ -7,9 +7,9 @@ import { Router } from '@angular/router';
 import { Group } from '../models/group.model';
 
 @Component({
-  selector: 'app-groups',
-  templateUrl: './groups.component.html',
-  styleUrls: ['./groups.component.css']
+    selector: 'app-groups',
+    templateUrl: './groups.component.html',
+    styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit {
     private user: User;
@@ -39,46 +39,47 @@ export class GroupsComponent implements OnInit {
         });
     }
 
-
+    private updateGroup(i, group) {
+        if (group.length == 1) {
+            //console.log("pushed: " + group[0]);
+            this.groups.push(group[0]);
+            var usersForThisGroup = [];
+            //console.log(i, 'before usersForThisGroup', usersForThisGroup);
+            for (var j = 0; j < group[0].userIDs.length; j++) {
+                this.userService.getUserByID(group[0].userIDs[j]).subscribe(function (users2) {
+                    //console.log('>>>>>>>>>>', this);
+                    if (users2.length == 1) {
+                        //console.log("found user belonging to group " + i + " name: " + users2[0].name);
+                        usersForThisGroup.push(users2[0]);
+                        //console.log(i, 'usersForThisGroup', usersForThisGroup);
+                    }
+                });
+            }
+            //console.log(i, 'after usersForThisGroup', usersForThisGroup);
+            console.log('=========this.users.length', this.users.length, i);
+            //console.log('', this.users);
+            this.users.push(usersForThisGroup);
+            //console.log('', this.users);
+        }
+    }
 
     public updateGroupList() {
+        var userID = this.cookieService.get("user-id");
+        this.userService.getUserByID(userID).subscribe(users => {
+            if (users.length != 1) {
+                this.redirect.navigate(['/']);
+                return;
+            }
+            this.user = (<User>users[0]);
+            this.data = "";
+            this.groups = [];
+            this.users = [];
 
-            var userID = this.cookieService.get("user-id");
-            this.userService.getUserByID(userID).subscribe(users => {
-                if (users.length != 1) {
-                    this.redirect.navigate(['/']);
-                    return;
-                }
-                this.user = (<User>users[0]);
-                this.data = "";
-                this.groups = [];
-                this.users = [];
+            for (var i = 0; i < this.user.groups.length; i++) {
+                this.groupService.getGroupByID(this.user.groups[i]).subscribe(this.updateGroup.bind(this, i));
+            }
 
-                for (var i = 0; i < this.user.groups.length; i++) {
-                    this.groupService.getGroupByID(this.user.groups[i]).subscribe(group => {
-                        if (group.length == 1) {
-                            console.log("pushed: " + group[0]);
-                            this.groups.push(group[0]);
-                            var usersForThisGroup = [];
-                            for (var i = 0; i < group[0].userIDs.length; i++) {
-                                this.userService.getUserByID(group[0].userIDs[i]).subscribe(users2 => {
-                                    if (users2.length == 1) {
-                                        console.log("found user belonging to group " + i + " name: " + users2[0].name);
-                                        usersForThisGroup.push(users2[0]);
-                                        console.log(this.users);
-                                    }
-                                });
-                            }
-                            this.users.push(usersForThisGroup);
-                            
-                        }
-                    });
-                }
-
-            });
-
-
-
+        });
     }
 
     public createGroup(groupName: string) {
