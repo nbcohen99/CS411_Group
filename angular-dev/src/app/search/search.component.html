@@ -1,4 +1,4 @@
-<!--
+﻿<!--
 
 <input class="textField" #searchInput placeholder="Search Term" (keyup.enter)="searchYelp(searchInput.value)">
 
@@ -31,6 +31,7 @@
 <!doctype html>
 <html lang="en">
 <head>
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -42,16 +43,131 @@
 
     <title>USER</title>
 </head>
+<style>
+    html * {
+        font-family: 'Source Sans Pro', sans-serif !important;
+    }
+
+    .bg-1 {
+        background-color: #4a5d34;
+        color: #ffffff;
+    }
+
+    .bg-2 {
+        background-color: #bee494;
+        color: #ffffff;
+    }
+
+    .bg-3 {
+        background-color: #afd189;
+        color: #ffffff;
+    }
+
+    .bg-4 {
+        background-color: #9fbf7b;
+        color: #ffffff;
+    }
+
+
+    .container-fluid {
+        padding-top: 24px;
+        padding-bottom: 30px;
+    }
+
+    .container-fluid-footer {
+        padding-top: 36px;
+        padding-bottom: 36px;
+    }
+
+    .container-fluid-small {
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+
+    .container-fluid-pick {
+        padding-top: 24px;
+        padding-bottom: 1px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .container-fluid-pick-link {
+        padding-top: 1px;
+        padding-bottom: 12px;
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .container-fluid-filter {
+        padding-top: 24px;
+        padding-bottom: 1px;
+    }
+
+    .container-fluid-search {
+        padding-bottom: 24px;
+    }
+
+    .navbar {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        border: 0;
+        border-radius: 0;
+        margin-bottom: 0;
+        font-size: 11px;
+        letter-spacing: 5px;
+        background-color: #4a5d34 !important;
+    }
+    /* Navbar items to the right */
+    .ml-auto .dropdown-menu {
+        left: auto !important;
+        right: 0px;
+    }
+
+    .navbar-nav li a:hover {
+        color: #bee494 !important;
+    }
+
+    /* Navtab colors */
+    .nav li a {
+        color: #4a5d34 !important;
+    }
+
+    .nav-tabs li.active a, .nav-tabs li.active a:focus, .nav-tabs li.active a:hover {
+        background-color: #bee494 !important;
+        border-bottom-color: transparent !important;
+        border-color: #4a5d34;
+    }
+
+    .nav-tabs {
+        border-bottom-color: #4a5d34 !important;
+    }
+
+    .modal-body {
+        color: black;
+    }
+</style>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-        <a class="navbar-brand" href="user.html">
+        <a class="navbar-brand" routerLink="/profile">
             <img src="assets/img/logo.png" class="rounded-circle" alt="logo" style="width: 40px;">
         </a>
-        <h2>USER's Splits</h2>
+        <h2>SEARCH</h2>
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="index.html">LOGOUT</a>
+                <a class="nav-link" routerLink="/profile">PROFILE</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/friends">FRIENDS</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="/groups">GROUPS</a>
+            </li>
+            <li class="nav-item">
+                    <a class="nav-link" routerLink="/search">SEARCH</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="logOut()">LOGOUT</a>
             </li>
         </ul>
     </nav>
@@ -59,7 +175,7 @@
     <!-- FILTER -->
     <div class="container-fluid-filter bg-2 text-center">
         <!-- DISTANCE -->
-       
+
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <label class="btn btn-secondary" [ngClass]="{'active': activeDistanceButton[0] == true}">
                 <input type="radio" name="options" (click)="updateActiveDistance(0)" id="Bird's-eye View" autocomplete="off" checked> Bird's-eye View (20 mi.)
@@ -332,10 +448,17 @@
         <div class="row">
             <div class="col">
                 <div class="input-group">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">@</span>
-                    </div>
-                    <input type="text" class="form-control" placeholder="Venmo Username">
+                    <label for="select">Choose your group:</label>
+                    <select (change)="getGroupMembers($event.target.value)" class="form-control" id="select">
+                        <option value="-1">Choose a Group</option>
+                        <option *ngFor="let group of groupList; let i = index" value={{i}}>{{group.name}}</option>
+                    </select>
+                </div>
+                <label>Group Members:</label>
+                <div class="input-group">
+                    <ul>
+                        <li *ngFor="let member of memberList;let i = index" type="checkbox" name="member" value={{member.id}}><button class="btn-secondary" (click)="removeMember(i)">Omit</button>{{member.name}} 
+                    </ul>
                 </div>
             </div>
             <div class="col text-right">

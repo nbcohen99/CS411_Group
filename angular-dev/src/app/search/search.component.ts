@@ -1,13 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { YelpSearchService } from '../services/yelp-search.service';
 import { LyftSearchService } from '../services/lyft-search.service';
+import { last } from 'rxjs/operators';
+import { Observable, range } from 'rxjs';
+import { Group } from '../models/group.model';
+import { User } from '../models/user.model';
+import { CookieService } from 'ngx-cookie-service';
+import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
+import { GroupService } from '../services/group.service';
 
 @Component({
-  selector: 'app-search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+    selector: 'app-search',
+    templateUrl: './search.component.html',
+    styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
+
+  user: User; // this logged in user
 
   yelpNames: any[]; // store restaurant results
   yelpAddresses: any[]; // store restaurant addresses, same index as yelpNames
@@ -36,10 +46,17 @@ export class SearchComponent implements OnInit {
   lyftDeepLink: string;
   venmoDeepLink: string;
 
+  groupList: Group[] = [];
+  memberList: User[] = [];
+
   constructor(
     private yelpSearch: YelpSearchService,
     private lyftSearch: LyftSearchService,
-  ) { }
+    private cookieService: CookieService,
+    private userService: UserService,
+    private groupService: GroupService,
+    private redirect: Router
+) { }
 
 
   ngOnInit() {
@@ -51,7 +68,48 @@ export class SearchComponent implements OnInit {
     this.activePriceButton = [false, false, false, false];
 
 
+    var uid = this.cookieService.get("user-id");
+    this.userService.getUserByID(uid).subscribe(users => {
+        if (users.length != 1) {
+            console.log("UserID not found");
+            this.redirect.navigate(['/']);
+        }
+        else {
+            this.user = users[0];
+            this.getAllGroups();
+
+        }
+    });
+
+
   }
+
+  removeMember(index: number) {
+        this.memberList.splice(index, 1);
+    }
+    getAllGroups() {
+        //for every group this user is a part of, grab the group's display name
+        for (var i = 0; i < this.user.groups.length; i++) {
+            this.groupService.getGroupByID(this.user.groups[i]).subscribe(groups => {
+                if (groups.length == 1) {
+                    this.groupList.push(groups[0]);
+                }
+            });
+        }
+    }
+
+    getGroupMembers(index: number) {
+        this.memberList = [];
+        for (var i = 0; i < this.groupList[index].userIDs.length; i++) {
+            this.userService.getUserByID(this.groupList[index].userIDs[i]).subscribe(users => {
+                if (users.length == 1) {
+                    this.memberList.push(users[0]);
+                    console.log("pushed");
+                    console.log(users[0]);
+                }
+            });
+        }
+    }
 
   // starter function call that takes in all filters and parameters needed
   startProcess(
@@ -112,10 +170,8 @@ export class SearchComponent implements OnInit {
         }
 
         console.log("pushed to list");
-      },
-
+      }
     )
-
   }
 
 
@@ -131,8 +187,9 @@ export class SearchComponent implements OnInit {
     else {
       this.addressLyft(destinationAddress);
     }
-
   }
+    
+
 
 
   getCurrentLocation(currentAddress: string, destinationAddress: string) {
@@ -140,24 +197,23 @@ export class SearchComponent implements OnInit {
     console.log(destinationAddress);
     var location = { display_address: null, lat: null, lng: null, place_id: null, routable_address: null }
 
-
     this.lyftSearch.getLatLong(currentAddress).subscribe(
       (data: any) => {
-        location = data;
-        this.currentLat = location.lat;
-        this.currentLong = location.lng;
-        this.currentAddress = location.routable_address;
+          location = data;
+          this.currentLat = location.lat;
+          this.currentLong = location.lng;
+          this.currentAddress = location.routable_address;
 
-        this.addressLyft(destinationAddress);
+          this.addressLyft(destinationAddress);
 
 
       }
 
-    )
-  }
+  )
+}
 
 
-
+    
 
   // Gets price and time estimates for several Lyft options
   estimateLyft(start_lat: string, start_long, end_lat, end_long) {
@@ -206,74 +262,73 @@ export class SearchComponent implements OnInit {
         }
       )
 
-  }
-
-  // parses the returned data from cents and seconds into dollars and minutes
-  parseEstimate(estimatedTime: number, minCost: number, maxCost: number) {
-    var minutes = estimatedTime / 60;
-
-    var minDecimalIndex = minutes.toString().indexOf(".");
-    var seconds = estimatedTime - (parseInt(minutes.toString().substring(0, minDecimalIndex)) * 60);
-    return [minutes, seconds, minCost / 100, maxCost / 100]
-
-  }
-
-
-  // Find the coords of the user's entered location or get the current location through browser
-  addressLyft(address: string) {
-
-    if (!this.enteredCurrentLocation) {
-      navigator.geolocation.getCurrentPosition(
-        position => {
-          this.currentLat = position.coords.latitude;
-          this.currentLong = position.coords.longitude;
-        }
-      )
     }
 
-    // Uses Lyft API to get full address, Long, Lat of given address
-    var location = { display_address: null, lat: null, lng: null, place_id: null, routable_address: null }
-    this.lyftSearch.getLatLong(address).subscribe(
-      (data: any) => {
+    // parses the returned data from cents and seconds into dollars and minutes
+    parseEstimate(estimatedTime: number, minCost: number, maxCost: number) {
+        var minutes = estimatedTime / 60;
+        var minDecimalIndex = minutes.toString().indexOf(".");
+        var seconds = estimatedTime - (parseInt(minutes.toString().substring(0, minDecimalIndex)) * 60);
+        return [minutes, seconds, minCost / 100, maxCost / 100]
+
+    }
 
 
-        location = data;
-        this.destinationLat = location.lat;
-        this.destinationLong = location.lng;
+    // Find the coords of the user's entered location or get the current location through browser
+    addressLyft(address: string) {
+
+        if (!this.enteredCurrentLocation) {
+            navigator.geolocation.getCurrentPosition(
+                position => {
+                    this.currentLat = position.coords.latitude;
+                    this.currentLong = position.coords.longitude;
+                }
+            )
+        }
+
+        // Uses Lyft API to get full address, Long, Lat of given address
+        var location = { display_address: null, lat: null, lng: null, place_id: null, routable_address: null }
+        this.lyftSearch.getLatLong(address).subscribe(
+            (data: any) => {
+
+
+                location = data;
+                this.destinationLat = location.lat;
+                this.destinationLong = location.lng;
 
 
 
-        this.estimateLyft(
-          this.currentLat.toString(),
-          this.currentLong.toString(),
-          this.destinationLat.toString(),
-          this.destinationLong.toString()
-        )
+                this.estimateLyft(
+                    this.currentLat.toString(),
+                    this.currentLong.toString(),
+                    this.destinationLat.toString(),
+                    this.destinationLong.toString()
+                )
 
-      }
-    );
+            }
+        );
 
 
-  }
+    }
 
-  // Creates a Lyft deeplink for the selected destination and current location
-  getLyftLink(rideType: string) {
-    var lyftDeep = "lyft://ridetype";
-    return lyftDeep +
-      "?id=" + rideType +
-      "&pickup[latitude]=" + this.currentLat +
-      "&pickup[longitude]=" + this.currentLong +
-      "&destination[latitude]=" + this.destinationLat +
-      "&destination[longitude]=" + this.destinationLong;
+    // Creates a Lyft deeplink for the selected destination and current location
+    getLyftLink(rideType: string) {
+        var lyftDeep = "lyft://ridetype";
+        return lyftDeep +
+            "?id=" + rideType +
+            "&pickup[latitude]=" + this.currentLat +
+            "&pickup[longitude]=" + this.currentLong +
+            "&destination[latitude]=" + this.destinationLat +
+            "&destination[longitude]=" + this.destinationLong;
 
-  }
+    }
 
-  // Creates a Venmo deeplink for the selected amount
-  splitCheck(amount: number, groupSize: number, username: string) {
-    var amountPerPerson = amount / groupSize;
-    var venmoDeep = "venmo://paycharge?charge=pay&recipients=";
-    return venmoDeep + username + "&amount=" + amountPerPerson + "&note=Lyft ride using Splitcheck";
-  }
+    // Creates a Venmo deeplink for the selected amount
+    splitCheck(amount: number, username: string) {
+        var amountPerPerson = amount / this.memberList.length;
+        var venmoDeep = "venmo://paycharge?charge=pay&recipients=";
+        return venmoDeep + username + "&amount=" + amountPerPerson + "&note=Bill paid using Splitcheck";
+    }
 
   // updates the distance filter and the button is active
   updateActiveDistance(index: number) {
@@ -334,11 +389,11 @@ export class SearchComponent implements OnInit {
 
 // Interface for results that come back from Lyft rides
 export interface LyftEstimate {
-  currency: string;
-  display_name: string;
-  estimated_cost_cents_max: number;
-  estimated_cost_cents_min: number;
-  estimated_duration_seconds: number
+    currency: string;
+    display_name: string;
+    estimated_cost_cents_max: number;
+    estimated_cost_cents_min: number;
+    estimated_duration_seconds: number
 }
 
 
