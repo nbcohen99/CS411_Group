@@ -132,6 +132,8 @@
           @{{user.name.toLowerCase().split(' ').join('')}}
           &nbsp;&nbsp;&nbsp;&nbsp;
           <button (click)=this.add(user.id)>Add {{user.name.split(' ')[0]}}</button>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          <button (click)=this.add(user.id)>Unfriend {{user.name.split(' ')[0]}}</button>
           <br><br>
         </div>
     </div>

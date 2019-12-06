@@ -62,4 +62,22 @@ export class FriendsComponent implements OnInit {
     });
   }
 
+  /*
+   *  One-argument wrapper for UserService -> addFriend
+   */
+  public remove(friendID) {
+    var cookie = this.cookieService.get("user-id");
+    this.userService.getUserByID(cookie).subscribe(users => {
+        if (users.length != 1) {
+            console.log("UserID not found");
+            this.redirect.navigate(['/']);
+        } else {
+            let userID = users[0].id;
+            console.log('Make users ' + userID + ' and ' + friendID + ' friends.');
+            this.userService.removeFriend(userID, friendID);
+            this.userService.removeFriend(friendID, userID);  // Assume the friendship is two-sided :D
+        }
+    });
+  }
+
 }
