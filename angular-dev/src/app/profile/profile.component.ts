@@ -34,6 +34,7 @@ export class ProfileComponent implements OnInit {
             else {
                 this.user = users[0];
                 this.fullName = this.user.name;
+                this.USER_NAME = this.user.name.toLowerCase().split(' ').join('');
                 this.friends = this.user.friends.length;
                 this.groups = this.user.groups.length;
 
