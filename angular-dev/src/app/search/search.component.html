@@ -210,6 +210,7 @@
             </label>
         </div>
         <!-- CATEGORIES -->
+
         <!-- Button trigger modal -->
         <button type="button" style="background-color: #6E757D; border:#6E757D;" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable">
             Categories
@@ -384,10 +385,11 @@
                 </div>
             </div>
             <div class="col text-right" style="padding-right: 118px;">
-                <input #searchLyftInput placeholder="Enter your current location">
+                <input #searchLyftInput placeholder="Enter your current location" style="width:220px;">
                 <input #searchInput class="textField" placeholder="Search Term" 
                        (keyup.enter)="searchYelp(searchInput.value, searchInput.value, true)">
                 <button type="button" style="background-color:#f14e4e; border:#f14e4e;" class="btn btn-primary" (click)="searchYelp(searchInput.value, searchLyftInput.value, true)">Search</button>
+                <br><br>
                 <button type="button" style="background-color:#f14e4e; border:#f14e4e;" class="btn btn-primary" (click)="searchYelp(searchInput.value, searchLyftInput.value, false)">Use Current Location</button>
             </div>
         </div>
@@ -462,40 +464,6 @@
                 </div>
             </div>
             <div class="col text-right">
-                <button type="button" style="background-color: #6E757D; border:#6E757D;"class="btn btn-primary" data-toggle="modal" data-target="#exampleModalScrollable2">
-                    Members
-                </button>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModalScrollable2" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle2" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-scrollable" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalScrollableTitle">Modal title</h5>
-                        <label type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </label>
-                      </div>
-                      <div class="modal-body">
-                        <div class="row">
-                          <div class="col text-left">
-                            <div class="checkbox">
-                              <label><input type="checkbox" value="1"> @email.com</label>
-                            </div>
-                            <div class="checkbox">
-                              <label><input type="checkbox" value="2"> @email.com</label>
-                            </div>
-                            <div class="checkbox">
-                              <label><input type="checkbox" value="3"> @email.com</label>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" style="background-color: #2e50e6;" class="btn btn-secondary" data-dismiss="modal">Save</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
             </div>
         </div>
 
