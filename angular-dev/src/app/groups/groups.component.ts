@@ -39,47 +39,65 @@ export class GroupsComponent implements OnInit {
         });
     }
 
-    private updateGroup(i, group) {
+    private updateGroup(group) {
         if (group.length == 1) {
-            //console.log("pushed: " + group[0]);
             this.groups.push(group[0]);
             var usersForThisGroup = [];
-            //console.log(i, 'before usersForThisGroup', usersForThisGroup);
             for (var j = 0; j < group[0].userIDs.length; j++) {
-                this.userService.getUserByID(group[0].userIDs[j]).subscribe(function (users2) {
-                    //console.log('>>>>>>>>>>', this);
-                    if (users2.length == 1) {
-                        //console.log("found user belonging to group " + i + " name: " + users2[0].name);
-                        usersForThisGroup.push(users2[0]);
-                        //console.log(i, 'usersForThisGroup', usersForThisGroup);
-                    }
-                });
+                let user_promise = this.userService.getUserByID(group[0].userIDs[j]).toPromise();
+                usersForThisGroup.push(user_promise);
             }
-            //console.log(i, 'after usersForThisGroup', usersForThisGroup);
-            console.log('=========this.users.length', this.users.length, i);
-            //console.log('', this.users);
-            this.users.push(usersForThisGroup);
-            //console.log('', this.users);
+
+            return Promise.all(usersForThisGroup);
         }
+    }
+
+    private __updateGroupList(users) {
+        if (users.length != 1) {
+            this.redirect.navigate(['/']);
+            return;
+        }
+        this.user = (<User>users[0]);
+        this.data = "";
+        this.groups = [];
+        this.users = [];
+
+        let all_promises = [];
+
+        for (var i = 0; i < this.user.groups.length; i++) {
+            let group_promise = this.groupService.getGroupByID(this.user.groups[i]).toPromise();
+
+            let users_promise = new Promise(function (resolve) {
+                group_promise.then(function (group) {
+                    let usersForThisGroup = this.updateGroup(group);
+                    resolve(usersForThisGroup);
+                }.bind(this));
+            }.bind(this));
+
+            all_promises.push(users_promise);
+        }
+
+        Promise.all(all_promises).then(function (all_users) {
+            console.log(all_users);
+
+            // Shuck array into simple user-list format
+            for (var i = 0; i < all_users.length; i++) {
+                if (all_users[i].length === 1) {
+                    all_users[i] = all_users[i][0];
+                } else {
+                    for (var j = 0; j < all_users[i].length; j++) {
+                        all_users[i][j] = all_users[i][j][0];
+                    }
+                }
+            }
+
+            this.users = all_users;
+        }.bind(this));
     }
 
     public updateGroupList() {
         var userID = this.cookieService.get("user-id");
-        this.userService.getUserByID(userID).subscribe(users => {
-            if (users.length != 1) {
-                this.redirect.navigate(['/']);
-                return;
-            }
-            this.user = (<User>users[0]);
-            this.data = "";
-            this.groups = [];
-            this.users = [];
-
-            for (var i = 0; i < this.user.groups.length; i++) {
-                this.groupService.getGroupByID(this.user.groups[i]).subscribe(this.updateGroup.bind(this, i));
-            }
-
-        });
+        this.userService.getUserByID(userID).toPromise().then(this.__updateGroupList.bind(this));
     }
 
     public createGroup(groupName: string) {
