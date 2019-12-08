@@ -1,5 +1,3 @@
 # Primary User #3
-## Personal Info (user profile)
-User’s calculated budget from personal Venmo transactions is displayed in this page. The user will have the ability to edit this budget in the case that they want to spend less, or are willing to spend more than the average from traced transactions.
-This page will also show the groups the user is hosting or is a member of. Clicking these groups will lead the user to access a separate page for each group.
-There will also be a section for the recent places this user has been and will record how much they spent at each location (maybe have the option to give a personal rating for future reference/filter future recommendations)
+## “Search” page - Filters
+The search page is where the functionality of the web app comes into play. The search page is where users input filters for restaurant preferences and are given options based on those inputs. After the user selects from filters such as price, distance, type of food, and location, a list of restaurants will appear in the drop down menu in the center of the page. If a user then selects a restaurant, the app will process this selection and provide Lyft ride information to that restaurant including type of ride, min/max price, and estimated time. 

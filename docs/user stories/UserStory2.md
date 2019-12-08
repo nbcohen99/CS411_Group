@@ -1,6 +1,4 @@
 # Primary User #2
-## Creating a Group
-A logged in user on the main page may click on a clearly marked “Groups” tab, upon which taking them to a separate page that handles all Group functionality. Much like creating a group DM on social media, or Discord for example, you are able to create a new group and invite users to it.
-The group tab also shows invites and has a button to accept and join a new group.
-To create a new group, there shall be some button dubbed “Create New Group”, opening a popup where you can invite Friends by their username, or name. Upon creating a new group, the logged in user shall be sent to the group’s individual page.
-The logged in user that created the group shall be deemed the “Host/Owner” of the group. Only the Host/Owner will be given the option to add/kick members in the group; this will be done to control group size.
+## Navigating the Site
+After logging in, a user will be redirected to their personal profile page. From there, the user can navigate to “friends”, “groups”, “search” pages, or log out using the log out button, all located on the navbar  at the top. 
+The “friends” page allows a user to view a list of friends, and gives the option to “add” or “unfriend” each member listed. The “groups” page provides a list of all of the users groups and also allows the user to create new groups. If the user is a host, each member has an action to be removed from a group, but all general members are given the option to leave a group as well. 

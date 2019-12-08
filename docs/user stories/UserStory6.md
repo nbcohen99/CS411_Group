@@ -1,3 +1,3 @@
-# Primary User #6
-## Menu Recommendations
-A user enters the restaurant and may take a photo of the menu using the app.  Our app sends a search query to the Yelp API for any reviews discussing menu items.
+# Secondary User #2
+## Logging Out
+The right most item of the navbar is a logout button that will allow the user to log out of the application and redirect them to the landing page. All groups in progress will still be saved if the user logs back in. 

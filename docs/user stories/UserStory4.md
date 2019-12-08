@@ -1,6 +1,3 @@
 # Primary User #4
-## Selecting a Restaurant in a Group
-After a group is created using the **Primary User #2** story, the user will be navigated to a new page. A logged in user can add people to an existing group by clicking an existing group, and clicking some button dubbed “Invite users to group”. 
-There will be a recommended budget value that will be used to search on Yelp, calculated by the group’s recent Venmo transactions.  There will also be a recommended filter on food genre that will be taken through Venmo transactions of all members in the group, and used to filter on Yelp.  These filters and location range, can be modified by the host using sliders/dropdown menus.
-Group info such the members in the group, who is the host, and the ability to add/remove members in the group will also be displayed during this process. As group members get added or removed, the recommended values will change.
-Once a restaurant is selected, the group page will change to the receipt page as described in **Primary User #5**
+## “Search” page - Choosing a Group
+Once a user makes the filter selections as described in **Primary User #3**, he can select from a dropdown of groups he is a part of, and is given the option to omit any other members from the payment split if he chooses to do so. Finally, the user should input his Venmo ID and the total price that will be split among all group members, and an email will be sent to each of those group members with a link to Venmo
